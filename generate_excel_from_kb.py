@@ -9,7 +9,7 @@ def format_headings_in_workbook(workbook, tactics):
     header_format.set_align('center')
     header_format.set_border(style=1)
     header_format.set_text_wrap()
-    header_format.set_bg_color('#b5b8b7')
+    header_format.set_bg_color('#B2BEC9')
 
     worksheet = workbook.get_worksheet_by_name('Main')
 
@@ -109,6 +109,7 @@ if __name__ == '__main__':
     technique_format.set_align('vcenter')
     technique_format.set_align('center')
     technique_format.set_border(style=1)
+    technique_format.set_bg_color("#F4FBFF")  # comment out if you want the unpoulated techniques to be differntly formatted
     technique_format.set_text_wrap()
 
     # Set format to see which ones have some content populated
@@ -118,7 +119,7 @@ if __name__ == '__main__':
     technique_format2.set_align('center')
     technique_format2.set_text_wrap()
     technique_format2.set_border(style=1)
-    technique_format2.set_bg_color("#E9E9E9")
+    technique_format2.set_bg_color("#E4EBEF")
 
     # set format for centralised x marks
     weakness_type_format = workbook.add_format()
