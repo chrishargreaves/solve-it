@@ -300,7 +300,7 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
                 main_worksheet.write_string(start_pos + 1, mit_index[each_mit], 'N', cell_format=blank_white_format)  # note we default everything to N to start with
                 main_worksheet.data_validation('{}{}'.format(xl_col_to_name(mit_index[each_mit]), str(start_pos + 2)),
                                              {'validate': 'list',
-                                              'source': ['Y', 'N', 'NA']})
+                                              'source': ['Y', 'Y (local)', 'Y (other)', 'Y (vendor)', 'N', 'NA']})
 
                 # Write blank mitigation status to start with (may get overwritten by lab config later)
                 main_worksheet.write_string('{}{}'.format(xl_col_to_name(mit_index[each_mit]), str(start_pos + 2)),
@@ -332,7 +332,7 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
             # Count cells with "Y" (mitigations implemented)
             main_worksheet.write_formula(start_pos + 1, 8 + max_mits + 0,
                                        '=COUNTIF(' + xl_col_to_name(8) + str(start_pos + 2) + ":" + xl_col_to_name(
-                                           8 + max_mits - 1) + str(start_pos + 2) + ',"Y")')
+                                           8 + max_mits - 1) + str(start_pos + 2) + ',"Y*")')
             
             # Count cells with "N" (mitigations not implemented)
             main_worksheet.write_formula(start_pos + 1, 8 + max_mits + 1,
