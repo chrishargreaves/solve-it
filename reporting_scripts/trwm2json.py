@@ -5,6 +5,7 @@ import json
 import io
 import logging
 import sys
+import re
 
 logging.basicConfig(encoding='utf-8', level=logging.INFO)
 
@@ -67,8 +68,10 @@ def parse_field_data(field_name, data):
             return decoded_json
     except json.JSONDecodeError:
         logging.debug(data)
-        # Check if it's simple text in quotes
-        if data.strip().startswith('"') and data.strip().endswith('"') and ',"' not in data and ', "' not in data:
+        # Check if it's simple text in quotes (single quoted field with no CSV separators)
+        # Use regex to detect multiple quoted CSV fields separated by comma and optional whitespace
+        csv_pattern = r'"[^"]*",\s*"[^"]*"'
+        if data.strip().startswith('"') and data.strip().endswith('"') and not re.search(csv_pattern, data):
             # Single quoted field - return as single item list 
             if data.strip().strip('"'):
                 result = [data.strip().strip('"')]             
@@ -80,7 +83,10 @@ def parse_field_data(field_name, data):
         # Then try CSV decoding        
         try:
             csv_reader = csv.reader(io.StringIO(data), delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, skipinitialspace=True)
-            csv_row = next(csv_reader)
+            csv_rows = list(csv_reader)
+            csv_row = []
+            for row in csv_rows:
+                csv_row.extend(row)
             # If we get multiple fields, it's CSV
             logging.debug(f"trying to decode {field_name} as CSV")
 

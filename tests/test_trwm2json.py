@@ -20,6 +20,16 @@ class TestParseFieldData(unittest.TestCase):
         result = parse_field_data("references", '"Ref 1, details", "Ref 2, details"')
         self.assertEqual(result, ["Ref 1, details", "Ref 2, details"])
     
+    def test_csv_parsing_with_newline(self):
+        """Test that CSV with quotes is parsed correctly"""
+        result = parse_field_data("references", '"Ref 1, details", \n"Ref 2, details"')
+        self.assertEqual(result, ["Ref 1, details", "Ref 2, details"])
+
+    def test_csv_parsing_with_multiple_spaces(self):
+        """Test that CSV with quotes and multiple spaces is parsed correctly"""
+        result = parse_field_data("references", '"Ref 1, details",   "Ref 2, details"')
+        self.assertEqual(result, ["Ref 1, details", "Ref 2, details"])
+
     def test_csv_with_trailing_comma(self):
         """Test CSV with trailing comma (empty strings filtered out)"""
         result = parse_field_data("examples", '"Example 1", "Example 2", ')
