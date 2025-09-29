@@ -1,7 +1,7 @@
 {
     "id": "T1144",
-    "name": "Browser profile examination",
-    "description": "The examination of the separate user profiles set up within a browser",
+    "name": "Browser profile enumeration",
+    "description": "The enumeration of the separate user profiles set up within a browser",
     "synonyms": [],
     "details": "",
     "subtechniques": [],

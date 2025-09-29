@@ -16,7 +16,7 @@
                      "T1146", 
                      "T1147"],
     "examples": [],
-    "weaknesses": ["W1113"],
+    "weaknesses": ["W1113", "W1250", "W1251"],
     "CASE_output_classes" : ["observable:URLHistory", "observable:CookieHistory", "observable:BrowserBookmark", "observable:BrowserCookie", "observable:URLVisit", "observable:URLHistoryEntry"],
     "references": ["Digital Detective Knowledgebase https://kb.digital-detective.net/display/BF",
                     "Oh, J., Lee, S. and Lee, S., 2011. Advanced evidence collection and analysis of web browser activity. Digital investigation, 8, pp.S62-S70."]
