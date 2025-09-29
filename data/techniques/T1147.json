@@ -1,0 +1,12 @@
+{
+    "id": "T1147",
+    "name": "Browser cookie examination",
+    "description": "The examination of stored browser cookies",
+    "synonyms": [],
+    "details": "",
+    "subtechniques": [],
+    "examples": [],
+    "weaknesses": [],
+    "CASE_output_classes" : [],
+    "references": []
+}
