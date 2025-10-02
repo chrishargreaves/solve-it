@@ -56,8 +56,7 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
         # Get the file name and extension
         base_path, extension = os.path.splitext(output_file)
         
-        # Add a timestamp to make the filename unique
-        from datetime import datetime
+        # Add a timestamp to make the filename unique        
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         output_file = f"{base_path}_{timestamp}{extension}"
         print(f"Output file already exists. Using new filename: {output_file}")
