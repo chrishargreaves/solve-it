@@ -20,6 +20,7 @@ import json
 import xlsxwriter
 import argparse
 import logging
+from datetime import datetime, timezone
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from solve_it_library import KnowledgeBase
@@ -98,6 +99,30 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
     workbook = xlsxwriter.Workbook(output_file)
     workbook.set_size(2000, 1024)
     main_worksheet = workbook.add_worksheet(name='Main')
+
+    # Add additional sheet with info
+    info_worksheet = workbook.add_worksheet(name='Info')
+    info_worksheet.set_column(0, 0, 50)
+    info_worksheet.set_column(1, 1, 140)
+    
+    info_worksheet.write_string(0, 0, "CLI parameters")
+    info_worksheet.write_string(0, 1, " ".join(sys.argv[1:]))
+    info_worksheet.write_string(1, 0, "Generated timestamp")
+    now_utc = datetime.now(timezone.utc).isoformat()
+    info_worksheet.write_string(1, 1, now_utc)
+
+    info_worksheet.write_string(2, 0, "Total objectives (in loaded knowledge base)")
+    info_worksheet.write_number(2, 1, len(kb.list_objectives()))
+
+    info_worksheet.write_string(3, 0, "Total techniques (in loaded knowledge base)")
+    info_worksheet.write_number(3, 1, len(kb.list_techniques()))
+
+    info_worksheet.write_string(4, 0, "Total weaknesses (in loaded knowledge base)")
+    info_worksheet.write_number(4, 1, len(kb.list_weaknesses()))
+
+    info_worksheet.write_string(5, 0, "Total mitigations (in loaded knowledge base)")
+    info_worksheet.write_number(5, 1, len(kb.list_mitigations()))
+
 
     # ----------------------------------------
     # Create cell formatting options for the workbook
