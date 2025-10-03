@@ -157,9 +157,10 @@ class KnowledgeBase:
                                 e.errors()
                             )
                             
-                            # Skip this file and continue with the next one
-                            continue
-                        
+                            # Raise exception if invalid JSON encountered
+                            raise SOLVEITDataError(f"Could not load data from {file_path}")
+                                                
+
                 except json.JSONDecodeError as e:
                     logger.error("Could not decode JSON from %s: %s", file_path, e)
                     raise SOLVEITDataError("Could not decode JSON from %s: %s", file_path, e)
