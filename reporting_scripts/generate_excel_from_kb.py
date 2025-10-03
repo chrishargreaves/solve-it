@@ -157,7 +157,11 @@ if __name__ == '__main__':
 
     for i, each_mitigation in enumerate(sorted(kb.list_mitigations())):
         mitigations_sheet.write_string(i+1, 0, each_mitigation)
-        mitigations_sheet.write_string(i+1, 1, kb.get_mitigation(each_mitigation).get('name'))
+        mit_obj = kb.get_mitigation(each_mitigation)
+        if mit_obj is None:
+            logging.error(f'Mitigation {each_mitigation} not found in KB')
+            sys.exit(-1)
+        mitigations_sheet.write_string(i+1, 1, mit_obj.get('name'))
         techniques_for_mitigation = kb.get_techniques_for_mitigation(each_mitigation)
         technique_ids = [t['id'] for t in techniques_for_mitigation]
         mitigations_sheet.write_string(i+1, 2, str(technique_ids))
