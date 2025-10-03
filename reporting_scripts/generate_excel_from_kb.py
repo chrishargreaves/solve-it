@@ -232,7 +232,7 @@ if __name__ == '__main__':
             if each_technique_id not in techniques_added:
                 each_technique = kb.get_technique(each_technique_id)
                 if each_technique is None:
-                    raise ValueError("Technique {} not found".format(each_technique_id))
+                    raise ValueError("Technique {} not found (referred to in {} (under \"{}\"))".format(each_technique_id, config_file, tactic))
 
                 technique_name = each_technique.get('name')
                 subtechniques = each_technique.get('subtechniques')
@@ -257,7 +257,7 @@ if __name__ == '__main__':
                         row = tactics_row_indexes[tactic]
                         each_subtechnique = kb.get_technique(each_subtechnique_id)
                         if each_subtechnique is None:
-                            raise ValueError(f'Subtechnqiue {each_subtechnique_id} not found. ({each_technique_id})')
+                            raise ValueError(f'Subtechnqiue {each_subtechnique_id} not found (referred to in {each_technique_id}).')
                             sys.exit(-1)
 
 
@@ -287,9 +287,8 @@ if __name__ == '__main__':
 
     for each in kb.list_techniques():
         if each not in techniques_added and each != "T1000":  # T1000 is demo technique so not expected to be referenced
-            print("WARNING: Technique {} exists, but is not indexed in sheet".format(each))
-
-
+            raise SOLVEITDataError("Technique {} exists, but is not indexed in sheet".format(each))
+                        
 
     # ----------------------------------------------------------------------------------------------------------------
     print('Adding the individual techniques sheets...')
