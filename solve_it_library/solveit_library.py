@@ -162,10 +162,13 @@ class KnowledgeBase:
                         
                 except json.JSONDecodeError as e:
                     logger.error("Could not decode JSON from %s: %s", file_path, e)
+                    raise SOLVEITDataError("Could not decode JSON from %s: %s", file_path, e)
                 except IOError as e:
                     logger.error("Could not read file %s: %s", file_path, e)
+                    raise SOLVEITDataError("Could not read file %s: %s", file_path, e)
                 except Exception as e:
                     logger.error("Unexpected error processing %s: %s", file_path, e)
+                    raise SOLVEITDataError("Unexpected error processing %s: %s", file_path, e)
         
         return loaded_data
 
@@ -1086,3 +1089,11 @@ class KnowledgeBase:
             logger.debug("No techniques found that reference mitigation %s.", mitigation_id)
 
         return associated_techniques
+
+
+class SOLVEITDataError(Exception):
+    """Custom exception for SOLVEIT data loading errors."""
+    pass    
+
+
+

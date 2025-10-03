@@ -7,7 +7,7 @@ import logging
 import pprint
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from solve_it_library import KnowledgeBase
+from solve_it_library import KnowledgeBase, SOLVEITDataError
 
 # Configure logging to show info and errors to console
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -56,7 +56,11 @@ if __name__ == '__main__':
     script_dir = os.path.dirname(os.path.abspath(__file__))
     solve_it_root = os.path.dirname(script_dir)  # Go up from reporting_scripts to solve-it root
     
-    kb = KnowledgeBase(solve_it_root, config_file)
+    try:
+        kb = KnowledgeBase(solve_it_root, config_file)
+    except SOLVEITDataError as e:
+        logging.error(f"Error loading SOLVE-IT knowledge base, exiting.")
+        sys.exit(-1)
 
     print("Using configuration file: {}".format(config_file))
 
@@ -101,7 +105,12 @@ if __name__ == '__main__':
         techniques_sheet.write_number(i, 2, len(kb.get_technique(each_technique).get('weaknesses', [])))
         total_mits = 0
         for each_weakness in kb.get_technique(each_technique).get('weaknesses', []):
-            total_mits += len(kb.get_weakness(each_weakness).get('mitigations', []))
+            weakness_obj = kb.get_weakness(each_weakness)
+            if weakness_obj is None:
+                logging.error(f'Weakness {each_weakness} not found for technique {each_technique} - Excel generation failed')
+                sys.exit(-1)
+            else:
+                total_mits += len(weakness_obj.get('mitigations', []))
         techniques_sheet.write_number(i, 3, total_mits)
         techniques_sheet.write_string(0, 2, "Weaknesses")
         techniques_sheet.write_string(0, 3, "Mitigations")
@@ -378,8 +387,12 @@ if __name__ == '__main__':
             mit_string_long = ''
             for each_mitigation in weakness_info.get('mitigations'):
                 mit_string_short = mit_string_short + f"{each_mitigation}, "  
-                mit_string_long = mit_string_long + f"{each_mitigation} ({kb.get_mitigation(each_mitigation).get('name')})\n"  
-                mit_list_for_this_technique.append(each_mitigation)
+                mit_obj = kb.get_mitigation(each_mitigation)
+                if mit_obj is None:
+                    raise ValueError(f'Mitigation {each_mitigation} not found for weakness {each_weakness} - Excel generation failed')
+                else:
+                    mit_string_long = mit_string_long + f"{each_mitigation} ({mit_obj.get('name')})\n"  
+                    mit_list_for_this_technique.append(each_mitigation)
             worksheet.write_string(err_list_start_row + i, 8, mit_string_short.rstrip(', '), cell_format=technique_list_format)
             worksheet.write_comment(err_list_start_row + i, 8, mit_string_long.rstrip('\n'), {"font_size": 12, "x_scale": 3.0, "height": len(weakness_info.get('mitigations') * 14 * 3)})
             # worksheet.write_string(err_list_start_row + i, 9, mit_string_long.rstrip('\n'))
@@ -486,5 +499,7 @@ if __name__ == '__main__':
     info_sheet.write_string(7, 0, "Proportion of techniques with weaknesses")
     info_sheet.write_number(7, 1, round(total_techniques_with_weaknesses / len(kb.list_techniques()), 2))
 
-
     workbook.close()
+
+    print("Workbook generation complete.")
+
