@@ -14,7 +14,7 @@ T1012	Hardware write blockers	A hardware write blocking device [should] prevent 
 T1013	Software write blockers	Use of a software-based tool that prevents a computer from writing to computer storage media connected to it (NIST 2006)	[]
 T1014	Chain of custody documentation		[]
 T1015	Privacy preserving selective extraction	Previewing a data source and selecting a subset of the data for collection into a container such as a tar/zip file or a forensic image format for the purposes of protecting the privacy of the complainant or witness.	[]
-T1016	Live data collection	Running commands on a live system to collect specific pieces of information e.g. running processes or open ports	[]
+T1016	Live data collection	Running commands on a live system to collect specific pieces of information e.g. running processes or open ports	['Live response data collection', 'Volatile data collection']
 T1017	Network packet capture		[]
 T1018	Remote data collection		[]
 T1019	Mobile backup extraction	Using the backup capability of the device to extract data from a mobile device (todo better definition)	[]
