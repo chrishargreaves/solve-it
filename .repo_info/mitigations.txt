@@ -180,3 +180,12 @@ M1179	If timestamp is local time, ensure that the system timezone was applicable
 M1180	Testing correct extraction of logfile entry timestamps
 M1181	Testing logfile parsing capability
 M1182	Testing of correct log entry type extraction
+M1187	Ensure browser cache data is also considered  (T1138)
+M1188	Ensure all profiles of the web browser are considered (T1144)
+M1189	Conduct experiments to determine if content from the page in question is cached only when viewed in the browser
+M1190	Ensure that the context of recovered URLs is considered during event reconstruction
+M1191	Ensure that profile configuration is examined rather than just folders within the standard profile folder (T1143)
+M1192	Examine browser configuration to determine history retention settings (T1143)
+M1193	Obtain older versions of browser history files from backups or from file system versioning features
+M1194	Consider carefully page titles and other details associated with older web history visits when details are recovered using SQL join queries.
+M1195	Also examine browser cache to confirm details about an older web visit when details are recovered using SQL join queries. (T1138)
