@@ -1,0 +1,21 @@
+{
+    "id": "T1137",
+    "name": "Browser history examination",
+    "description": "The examination of artifacts of webpages visited",
+    "synonyms": ["web history examination", 
+                 "internet history examination"],
+    "details": "These are typically what are displayed in the address bar, with data typically stored within a locally stored database.",
+    "subtechniques": [],
+    "examples": [],
+    "weaknesses": ["W1243", 
+                   "W1244", 
+                   "W1108", 
+                   "W1245", 
+                   "W1246",
+                "W1109", "W1110", "W1111", "W1112"],
+    "CASE_output_classes" : ["observable:URLHistory",
+                             "observable:URLVisit",
+                             "observable:URLHistoryEntry",
+                             "observable:visitTime"],
+    "references": []
+}
