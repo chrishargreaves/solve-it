@@ -7,7 +7,7 @@ import logging
 import pprint
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from solve_it_library import KnowledgeBase
+from solve_it_library import KnowledgeBase, SOLVEITDataError
 
 # Configure logging to show info and errors to console
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -56,7 +56,11 @@ if __name__ == '__main__':
     script_dir = os.path.dirname(os.path.abspath(__file__))
     solve_it_root = os.path.dirname(script_dir)  # Go up from reporting_scripts to solve-it root
     
-    kb = KnowledgeBase(solve_it_root, config_file)
+    try:
+        kb = KnowledgeBase(solve_it_root, config_file)
+    except SOLVEITDataError as e:
+        logging.error(f"Error loading SOLVE-IT knowledge base, exiting.")
+        sys.exit(-1)
 
     print("Using configuration file: {}".format(config_file))
 
@@ -101,7 +105,12 @@ if __name__ == '__main__':
         techniques_sheet.write_number(i, 2, len(kb.get_technique(each_technique).get('weaknesses', [])))
         total_mits = 0
         for each_weakness in kb.get_technique(each_technique).get('weaknesses', []):
-            total_mits += len(kb.get_weakness(each_weakness).get('mitigations', []))
+            weakness_obj = kb.get_weakness(each_weakness)
+            if weakness_obj is None:
+                logging.error(f'Weakness {each_weakness} not found for technique {each_technique} - Excel generation failed')
+                sys.exit(-1)
+            else:
+                total_mits += len(weakness_obj.get('mitigations', []))
         techniques_sheet.write_number(i, 3, total_mits)
         techniques_sheet.write_string(0, 2, "Weaknesses")
         techniques_sheet.write_string(0, 3, "Mitigations")
@@ -148,7 +157,11 @@ if __name__ == '__main__':
 
     for i, each_mitigation in enumerate(sorted(kb.list_mitigations())):
         mitigations_sheet.write_string(i+1, 0, each_mitigation)
-        mitigations_sheet.write_string(i+1, 1, kb.get_mitigation(each_mitigation).get('name'))
+        mit_obj = kb.get_mitigation(each_mitigation)
+        if mit_obj is None:
+            logging.error(f'Mitigation {each_mitigation} not found in KB')
+            sys.exit(-1)
+        mitigations_sheet.write_string(i+1, 1, mit_obj.get('name'))
         techniques_for_mitigation = kb.get_techniques_for_mitigation(each_mitigation)
         technique_ids = [t['id'] for t in techniques_for_mitigation]
         mitigations_sheet.write_string(i+1, 2, str(technique_ids))
@@ -223,7 +236,7 @@ if __name__ == '__main__':
             if each_technique_id not in techniques_added:
                 each_technique = kb.get_technique(each_technique_id)
                 if each_technique is None:
-                    raise ValueError("Technique {} not found".format(each_technique_id))
+                    raise ValueError("Technique {} not found (referred to in {} (under \"{}\"))".format(each_technique_id, config_file, tactic))
 
                 technique_name = each_technique.get('name')
                 subtechniques = each_technique.get('subtechniques')
@@ -248,7 +261,7 @@ if __name__ == '__main__':
                         row = tactics_row_indexes[tactic]
                         each_subtechnique = kb.get_technique(each_subtechnique_id)
                         if each_subtechnique is None:
-                            raise ValueError(f'Subtechnqiue {each_subtechnique_id} not found. ({each_technique_id})')
+                            raise ValueError(f'Subtechnqiue {each_subtechnique_id} not found (referred to in {each_technique_id}).')
                             sys.exit(-1)
 
 
@@ -278,9 +291,8 @@ if __name__ == '__main__':
 
     for each in kb.list_techniques():
         if each not in techniques_added and each != "T1000":  # T1000 is demo technique so not expected to be referenced
-            print("WARNING: Technique {} exists, but is not indexed in sheet".format(each))
-
-
+            raise SOLVEITDataError("Technique {} exists, but is not indexed in sheet".format(each))
+                        
 
     # ----------------------------------------------------------------------------------------------------------------
     print('Adding the individual techniques sheets...')
@@ -378,8 +390,12 @@ if __name__ == '__main__':
             mit_string_long = ''
             for each_mitigation in weakness_info.get('mitigations'):
                 mit_string_short = mit_string_short + f"{each_mitigation}, "  
-                mit_string_long = mit_string_long + f"{each_mitigation} ({kb.get_mitigation(each_mitigation).get('name')})\n"  
-                mit_list_for_this_technique.append(each_mitigation)
+                mit_obj = kb.get_mitigation(each_mitigation)
+                if mit_obj is None:
+                    raise ValueError(f'Mitigation {each_mitigation} not found for weakness {each_weakness} - Excel generation failed')
+                else:
+                    mit_string_long = mit_string_long + f"{each_mitigation} ({mit_obj.get('name')})\n"  
+                    mit_list_for_this_technique.append(each_mitigation)
             worksheet.write_string(err_list_start_row + i, 8, mit_string_short.rstrip(', '), cell_format=technique_list_format)
             worksheet.write_comment(err_list_start_row + i, 8, mit_string_long.rstrip('\n'), {"font_size": 12, "x_scale": 3.0, "height": len(weakness_info.get('mitigations') * 14 * 3)})
             # worksheet.write_string(err_list_start_row + i, 9, mit_string_long.rstrip('\n'))
@@ -486,5 +502,7 @@ if __name__ == '__main__':
     info_sheet.write_string(7, 0, "Proportion of techniques with weaknesses")
     info_sheet.write_number(7, 1, round(total_techniques_with_weaknesses / len(kb.list_techniques()), 2))
 
-
     workbook.close()
+
+    print("Workbook generation complete.")
+
