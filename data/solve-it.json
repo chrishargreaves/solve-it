@@ -48,14 +48,15 @@
 
     {"name":"Access partitions, volumes and file systems data",
     "description": "Process core data storage structures such as partitions, volumes, and file systems, recovering content and metadata.",
-    "techniques": ["T1062", "T1061", "T1064", "T1063",
+    "techniques": ["T1062", "T1061", "T1063",
                     "T1059", "T1060"]
     },
 
     {"name":"Extract artifacts stored by the operating system",
     "description": "Process data stored by the operating system to extract digital forensic artifacts.",
     "techniques": ["T1067", "T1065", "T1097", "T1066",
-                    "T1068", "T1096", "T1098", "T1083", "T1116"]
+                    "T1068", "T1096", "T1098", "T1083", "T1116",
+                    "T1149"]
     },
 
     {"name":"Extract artifacts stored by applications",
@@ -73,8 +74,7 @@
     {"name":"Locate potentially relevant content",
     "description": "Attempt to find digital artifacts relevant to the investigation.",
     "techniques": ["T1051", "T1050", "T1049",
-                     "T1118", "T1086",
-                     "T1121", "T1122", "T1123", "T1124", "T1125"]
+                     "T1118", "T1086"]
     },
 
 

@@ -1,0 +1,12 @@
+{
+    "id": "T1139",
+    "name": "Browser session examination",
+    "description": "The examination of sessions and open tabs and their individual histories",
+    "synonyms": [],
+    "details": "",
+    "subtechniques": [],
+    "examples": [],
+    "weaknesses": [],
+    "CASE_output_classes" : [],
+    "references": []
+}

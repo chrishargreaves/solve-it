@@ -33,8 +33,8 @@ W1031	Loading a memory imaging tool overwrites relevant data within memory	x
 W1032	Not all memory is acquired	x					
 W1033	Data referenced in memory is located within pagefile or swapfile but is not collected	x					
 W1034	Missing data from the live system due to compromised machine (e.g. rootkit)	x					
-W1035	Collecting incorrect information from live system due to compromised machine (e.g. rootkit)		x	x			
-W1036	Overwriting relevant data with changes caused by running the live tools		x	x			
+W1035	Collecting incorrect information from live system due to compromised machine (e.g. rootkit)	x	x	x		x	
+W1036	Overwriting relevant data with changes caused by running the live tools	x			x		
 W1037	Presenting data as complete, that is in reality a partial set						x
 W1038	Backup process returns an incomplete set of backup data	x					
 W1039	Backup data collection overwrites important data	x			x		
@@ -235,3 +235,13 @@ W1233	Failure to communicate imprecision in log entry timestamp					x
 W1234	Event time presented incorrectly due to incorrect timezone handling	x	x	x			x
 W1235	Failure to extract log entry type	x					
 W1236	Incorrectly interpreting a log entry type based on a different version of the generating software or operating system			x			x
+W1243	Missing browser history data as it was conducted outside of configured retention period	X					
+W1244	Missing browser history data as it was cleared by user	X					
+W1245	Relying on times stored in browser history that are not representative of exact web page visit time			X			X
+W1246	Attribution of incorrect details (e.g. page title) to a browser web visit due to join queries used in underlying database		X	X			X
+W1247	Attributing saved browser bookmarks to a user but they were bundled with the browser installation			X			
+W1248	Missing browser downloads as the files were saved to a non-standard location	X					
+W1249	Missing a web browser profile as it was stored outside of the usual browser profile folders	X					
+W1250	Incomplete browser activity extraction due to not considering the browser cache artifacts	X					
+W1251	Incomplete browser activity extraction due to failure to consider multiple profiles	X					
+W1252	Assuming that data stored in the cache was viewed by the user			X			X

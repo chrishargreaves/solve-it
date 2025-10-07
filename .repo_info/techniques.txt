@@ -132,3 +132,16 @@ T1130	Search for indicators of encrypted data
 T1131	Search for indicators of trail obfuscation	
 T1132	Search for indicators of artifact wiping	
 T1133	AI companion app examination	
+T1137	Browser history examination	
+T1138	Browser cache examination	
+T1139	Browser session examination	
+T1140	Browser autofill examination	
+T1141	Browser bookmarks examination	
+T1142	Browser downloads examination	
+T1143	Browser configuration examination	
+T1144	Browser profile enumeration	
+T1145	Browser extensions examination	
+T1146	Browser synchronization feature examination	
+T1147	Browser cookie examination	
+T1148	Browser web storage examination	
+T1149	File versioning feature examination	

@@ -14,13 +14,13 @@ framework for systematically assessing techniques by showing:
 The script can be used directly from the command line or imported as a module
 by other Python code.
 """
-
 import os
 import sys
 import json
 import xlsxwriter
 import argparse
 import logging
+from datetime import datetime, timezone
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from solve_it_library import KnowledgeBase
@@ -56,8 +56,7 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
         # Get the file name and extension
         base_path, extension = os.path.splitext(output_file)
         
-        # Add a timestamp to make the filename unique
-        from datetime import datetime
+        # Add a timestamp to make the filename unique        
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         output_file = f"{base_path}_{timestamp}{extension}"
         print(f"Output file already exists. Using new filename: {output_file}")
@@ -99,6 +98,30 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
     workbook = xlsxwriter.Workbook(output_file)
     workbook.set_size(2000, 1024)
     main_worksheet = workbook.add_worksheet(name='Main')
+
+    # Add additional sheet with info
+    info_worksheet = workbook.add_worksheet(name='Info')
+    info_worksheet.set_column(0, 0, 50)
+    info_worksheet.set_column(1, 1, 140)
+    
+    info_worksheet.write_string(0, 0, "CLI parameters")
+    info_worksheet.write_string(0, 1, " ".join(sys.argv[1:]))
+    info_worksheet.write_string(1, 0, "Generated timestamp")
+    now_utc = datetime.now(timezone.utc).isoformat()
+    info_worksheet.write_string(1, 1, now_utc)
+
+    info_worksheet.write_string(2, 0, "Total objectives (in loaded knowledge base)")
+    info_worksheet.write_number(2, 1, len(kb.list_objectives()))
+
+    info_worksheet.write_string(3, 0, "Total techniques (in loaded knowledge base)")
+    info_worksheet.write_number(3, 1, len(kb.list_techniques()))
+
+    info_worksheet.write_string(4, 0, "Total weaknesses (in loaded knowledge base)")
+    info_worksheet.write_number(4, 1, len(kb.list_weaknesses()))
+
+    info_worksheet.write_string(5, 0, "Total mitigations (in loaded knowledge base)")
+    info_worksheet.write_number(5, 1, len(kb.list_mitigations()))
+
 
     # ----------------------------------------
     # Create cell formatting options for the workbook
@@ -184,7 +207,8 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
     # Write mitigations top header
     max_mits = kb.get_max_mitigations_per_technique()
     print('Max mitigations: {}'.format(max_mits))
-    max_letter = chr(ord('I') + max_mits - 1)
+    max_letter = xl_col_to_name(8 + max_mits - 1)  # Column I is index 8, so last mitigation column is 8 + max_mits - 1
+
     main_worksheet.merge_range("I1:{}1".format(max_letter), "Potential Mitigations", header_type_format)
     for i in range(0, max_mits):
         main_worksheet.write_string(1, 8 + i, "M{}".format(i), wrapped_title)
@@ -338,7 +362,7 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
                                 main_worksheet.write_string(
                                     '{}{}'.format(xl_col_to_name(mit_index[each_mit]), str(start_pos + 2)),
                                     lab_mit_data.get('status'))
-                                main_worksheet.write_string('{}{}'.format('AH', str(start_pos + 2)),
+                                main_worksheet.write_string('{}{}'.format(xl_col_to_name(8 + max_mits + 15,), str(start_pos + 2)),
                                                             lab_mit_data.get('notes'))
                     else:
                         logging.debug('technique {} NOT FOUND IN CONFIG'.format({full_technique_identifier}))
@@ -444,8 +468,8 @@ def main():
         
     except Exception as e:
         # Print error message
-        print(f"Error generating evaluation workbook: {str(e)}")
-        return 1  # Error exit code
+        print(f"Error generating evaluation workbook: {str(e)}")    
+        return -1  # Error exit code
 
 
 if __name__ == "__main__":

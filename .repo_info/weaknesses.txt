@@ -235,3 +235,13 @@ W1233	Failure to communicate imprecision in log entry timestamp
 W1234	Event time presented incorrectly due to incorrect timezone handling
 W1235	Failure to extract log entry type
 W1236	Incorrectly interpreting a log entry type based on a different version of the generating software or operating system
+W1243	Missing browser history data as it was conducted outside of configured retention period
+W1244	Missing browser history data as it was cleared by user
+W1245	Relying on times stored in browser history that are not representative of exact web page visit time
+W1246	Attribution of incorrect details (e.g. page title) to a browser web visit due to join queries used in underlying database
+W1247	Attributing saved browser bookmarks to a user but they were bundled with the browser installation
+W1248	Missing browser downloads as the files were saved to a non-standard location
+W1249	Missing a web browser profile as it was stored outside of the usual browser profile folders
+W1250	Incomplete browser activity extraction due to not considering the browser cache artifacts
+W1251	Incomplete browser activity extraction due to failure to consider multiple profiles
+W1252	Assuming that data stored in the cache was viewed by the user

@@ -74,14 +74,14 @@ class MyTestCase(unittest.TestCase):
         Test that tactics (objectives) listing returns expected content.
         
         Expected outcome:
-        - Should contain core SOLVE-IT objectives like 'Prioritise' and 'Acquire'
+        - Should contain core SOLVE-IT objectives like 'Prioritize' and 'Acquire'
         - Should return a reasonable number of objectives (at least 10+)
         - Content should match what's defined in the objective mapping file
         """
         kb = KnowledgeBase('.', 'solve-it.json')
         tactics = kb.list_tactics()
-        self.assertIn('Prioritise', tactics)
-        self.assertIn('Acquire', tactics)
+        self.assertIn('Prioritize digital evidence sources', tactics)
+        self.assertIn('Acquire data', tactics)
         self.assertGreater(len(tactics), 10)  # Should have substantial content
 
     def test_weakness_list_contents(self):
