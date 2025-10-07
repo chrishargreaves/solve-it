@@ -7,6 +7,6 @@
     "INAC-ALT": "",
     "INAC-COR": "",
     "MISINT": "X",
-    "mitigations": ["M1079", "M1080", "M1081"],
+    "mitigations": ["M1079", "M1080", "M1081", "M1082", "M1083"],
     "references": ["Casey, E., Nelson, A. and Hyde, J., 2019. Standardization of file recovery classification and authentication. Digital Investigation, 31, p.100873."]
 }
