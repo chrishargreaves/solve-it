@@ -229,7 +229,7 @@ def write_all_technique_files(kb, outpath):
                 technique_md_file.write(f"- {each_reference}\n")
             technique_md_file.write(f"\n\n")
 
-
+            # Add content from SOLVE-IT Extensions
             technique_md_file.write(f"{add_markdown_to_technique(each_technique_id)}")
 
             # Write footer with generation timestamp
