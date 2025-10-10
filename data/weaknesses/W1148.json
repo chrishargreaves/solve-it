@@ -1,6 +1,6 @@
 {
     "id": "W1148",
-    "name": "Incorrect time skew applied to a timeline entry",
+    "name": "Incorrect time offset applied to a timeline entry",
     "INCOMP": "",
     "INAC-EX": "x",
     "INAC-AS": "",
