@@ -35,18 +35,15 @@ def add_markdown_to_technique(id):
 
         each_extension_path = extension_folder
         logging.debug('f"extension path listed in config: {each_extension_path}"')
-
-        relative = False
-        # try direct access to path in case it is absoulve
+        
+        # try direct access to path in case it is an absolute path
         if os.path.exists(each_extension_path):
-            relative = True
             workable_path = each_extension_path
         # try assuming it is a relative path in the extension_data folder
-        elif os.path.exists(os.path.join(project_root, 'extension_data', each_extension_path)):
-            relative = True
+        elif os.path.exists(os.path.join(project_root, 'extension_data', each_extension_path)):            
             workable_path = os.path.join(project_root, 'extension_data', each_extension_path)
         else:            
-            logging.error(f'Extension path {each_extension_path} does not exist, exiting')
+            logging.error(f'Extension path {each_extension_path} could not be found, exiting')
             sys.exit(-1)
 
         extension_code_path = os.path.join(workable_path, 'extension_code.py')
