@@ -146,7 +146,7 @@ W1144	Failure to identify timestamps in a data source	x
 W1145	Failure to extract timestamps from a data source	x					
 W1146	Failure to consider non-timestamp based timing information	x					
 W1147	Failure to normalise timestamps correctly during timeline generation		x		x		
-W1148	Incorrect time skew applied to a timeline entry		x		x		
+W1148	Incorrect time offset applied to a timeline entry		x		x		
 W1149	Failure to determine clock accuracy at time of inferred event		x				x
 W1150	Misinterpreting events from automated processes as user generated ones		x				x
 W1151	Incorrectly decoding a timestamp from a data source				x		
