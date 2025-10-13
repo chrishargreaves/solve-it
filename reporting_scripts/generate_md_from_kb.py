@@ -7,7 +7,7 @@ import datetime
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from solve_it_library import KnowledgeBase, SOLVEITDataError
-from solve_it_library.solve_it_x import add_markdown_to_technique, get_extension_config
+from solve_it_library.solve_it_x import add_markdown_to_main_page, add_markdown_to_technique, get_extension_config
 
 
 def main():
@@ -121,6 +121,11 @@ def create_main_markdown(kb, outpath):
         # Write the header
         mdfile.write("# SOLVE-IT Knowledge Base\n\n")
         mdfile.write("This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub repository](https://github.com/SOLVE-IT-DF/solve-it) for more details.\n\n")
+
+        # Add any prefix from extensions        
+        mdfile.write(add_markdown_to_main_page())
+        mdfile.write("\n\n")
+        
 
         # Write table of contents
         mdfile.write(f"# Objective Index\n" )
