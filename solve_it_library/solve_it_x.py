@@ -73,11 +73,30 @@ def load_extension_module(extension_folder, project_root):
 
 
 def add_markdown_to_main_page():
-    return ""
+    logging.debug('Called solve-it-x main markdown code')    
+
+    project_root = Path(__file__).parent.parent
+    extension_config = get_extension_config(project_root)
+
+    if extension_config is None:
+        return ""
+
+    total_markdown_to_add = ""
+
+    for each_extension in extension_config.get('extensions'):
+        extension_folder = extension_config.get('extensions').get(each_extension).get('folder_path')
+
+        extension_module = load_extension_module(extension_folder, project_root)
+
+        if hasattr(extension_module, 'get_markdown_generic'):
+            total_markdown_to_add += extension_module.get_markdown_generic()
+
+    return total_markdown_to_add
 
 
-def add_markdown_to_technique(id):
-    logging.debug('Called solve-it-x markdown code')    
+
+def add_markdown_to_technique(t_id):
+    logging.debug('Called solve-it-x technique markdown code')    
 
     project_root = Path(__file__).parent.parent
     extension_config = get_extension_config(project_root)
@@ -93,7 +112,7 @@ def add_markdown_to_technique(id):
         extension_module = load_extension_module(extension_folder, project_root)
 
         if hasattr(extension_module, 'get_markdown_for_technique'):
-            total_markdown_to_add += extension_module.get_markdown_for_technique(id)
+            total_markdown_to_add += extension_module.get_markdown_for_technique(t_id)
 
     return total_markdown_to_add
 

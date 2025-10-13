@@ -7,7 +7,7 @@ import datetime
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from solve_it_library import KnowledgeBase, SOLVEITDataError
-from solve_it_library.solve_it_x import add_markdown_to_main_page, add_markdown_to_technique, get_extension_config
+import solve_it_library.solve_it_x as solve_it_x
 
 
 def main():
@@ -35,8 +35,19 @@ def main():
     print("Using configuration file: {}".format(config_file))    
 
     # Check for extensions and display information about them
-    extension_config = get_extension_config(solve_it_root)
+    extension_config = solve_it_x.get_extension_config(solve_it_root)
     if extension_config is not None:        
+        
+        # Lists any of the built-in fields that are set to not be displayed
+        if 'technique_fields' in extension_config:
+            for each_visibility_setting in extension_config.get('technique_fields'):
+                if extension_config.get('technique_fields').get(each_visibility_setting) is False:
+                    print(f"- config: field '{each_visibility_setting}' display set to false")
+        else:
+            print('Config file in incorrect format (no technique_fields field)')
+            sys.exit(-1)
+
+        # Lists any extensions that are in use
         extension_dict = extension_config.get('extensions')
         if len(extension_dict) > 0:
             print("Extensions configured:")
@@ -68,7 +79,7 @@ def main():
 
     create_main_markdown(kb, outpath)
     
-    write_all_technique_files(kb, outpath)
+    write_all_technique_files(kb, outpath, extension_config)
 
     print(f"Markdown file created at: {outpath}")
 
@@ -123,7 +134,7 @@ def create_main_markdown(kb, outpath):
         mdfile.write("This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub repository](https://github.com/SOLVE-IT-DF/solve-it) for more details.\n\n")
 
         # Add any prefix from extensions        
-        mdfile.write(add_markdown_to_main_page())
+        mdfile.write(solve_it_x.add_markdown_to_main_page())
         mdfile.write("\n\n")
         
 
@@ -160,7 +171,7 @@ def create_main_markdown(kb, outpath):
         mdfile.write(f"*Markdown generated: {generation_time}*\n")
 
 
-def write_all_technique_files(kb, outpath):
+def write_all_technique_files(kb, outpath, extension_config):
     generation_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for each_technique_id in kb.list_techniques():
@@ -172,70 +183,79 @@ def write_all_technique_files(kb, outpath):
         with open(technique_filepath, 'w', encoding='utf-8') as technique_md_file:
             technique_md_file.write(f"[< back to main](../solve-it.md)\n")
             technique_md_file.write(f"# {each_technique_id}\n\n")
-            technique_md_file.write(f"**ID:** {technique.get('id')}\n\n")
-            technique_md_file.write(f"**Name:** {technique.get('name')}\n\n")
-            technique_md_file.write(f"**Description:**\n\n")
-            technique_md_file.write(f"{technique.get('description')}\n\n")
+            
+            if extension_config is not None and extension_config.get('technique_fields').get('id'):
+                technique_md_file.write(f"**ID:** {technique.get('id')}\n\n")
+            if extension_config is not None and extension_config.get('technique_fields').get('name'):
+                technique_md_file.write(f"**Name:** {technique.get('name')}\n\n")
+            if extension_config is not None and extension_config.get('technique_fields').get('description'):
+                technique_md_file.write(f"**Description:**\n\n")            
+                technique_md_file.write(f"{technique.get('description')}\n\n")
 
-            technique_md_file.write(f"**Synonyms:**\n\n")
-            for each_synonym in technique.get('synonyms'):
-                technique_md_file.write(f"{each_synonym}, ")
-            technique_md_file.write("\n\n")
+            if extension_config is not None and extension_config.get('technique_fields').get('synonyms'):
+                technique_md_file.write(f"**Synonyms:**\n\n")
+                for each_synonym in technique.get('synonyms'):
+                    technique_md_file.write(f"{each_synonym}, ")
+                technique_md_file.write("\n\n")
 
-            technique_md_file.write(f"**Details:**\n\n")
-            technique_md_file.write(f"{technique.get('details')}\n\n")
+            if extension_config is not None and extension_config.get('technique_fields').get('details'):
+                technique_md_file.write(f"**Details:**\n\n")
+                technique_md_file.write(f"{technique.get('details')}\n\n")
 
-            technique_md_file.write(f"**Subtechniques:**\n\n")
-            for each_sub_technique_id in technique.get('subtechniques'):
-                sub_t = kb.get_technique(each_sub_technique_id)
-                if sub_t is None:
-                    logging.error(f'Subtechnique {each_sub_technique_id} not found (referred to from {each_technique_id})')
-                    sys.exit(-1)
-                technique_md_file.write(f"- [{each_sub_technique_id} - {sub_t.get('name')}]({each_sub_technique_id}.md)\n")
-            technique_md_file.write(f"\n\n")
-
-
-            technique_md_file.write(f"**Examples:**\n\n")
-            for each_example in technique.get('examples'):
-                technique_md_file.write(f"- {each_example}\n")
-            technique_md_file.write(f"\n\n")
-
-            technique_md_file.write(f"**CASE Output Classes:**\n\n")
-            for each_case_class in technique.get('CASE_output_classes'):
-                technique_md_file.write(f"    - {each_case_class}\n")
-            technique_md_file.write(f"\n\n")
-
-            technique_md_file.write(f"**Potential weaknesses and mitigations:**\n\n")
-            for weakness_id in technique.get('weaknesses'):
-                weakness = kb.get_weakness(weakness_id)
-                if weakness is None:
-                    logging.error(f"Weakness {weakness_id} not found (referred to from {each_technique_id})")
-                    sys.exit(-1)
-
-                categories_str = get_weakness_categories(weakness)
-
-                technique_md_file.write(f"- {weakness_id}: {weakness.get('name')} _({categories_str})_\n")
-                
-                # This adds all the mitigations
-                for each_mit in weakness.get('mitigations'):
-                    mitigation = kb.get_mitigation(each_mit)
-                    if mitigation is None:
-                        logging.error(f'Mitigation {each_mit} not found (referred to from weakness {weakness_id})')
+            if extension_config is not None and extension_config.get('technique_fields').get('subtechniques'):
+                technique_md_file.write(f"**Subtechniques:**\n\n")
+                for each_sub_technique_id in technique.get('subtechniques'):
+                    sub_t = kb.get_technique(each_sub_technique_id)
+                    if sub_t is None:
+                        logging.error(f'Subtechnique {each_sub_technique_id} not found (referred to from {each_technique_id})')
                         sys.exit(-1)
-                    if mitigation.get('technique') is None:
-                        technique_md_file.write(f"    - {each_mit}: {mitigation.get('name')} \n")
-                    else:
-                        technique_md_file.write(f"    - {each_mit}: {mitigation.get('name')} ([{mitigation.get('technique')}]({mitigation.get('technique') +'.md'}))\n")
+                    technique_md_file.write(f"- [{each_sub_technique_id} - {sub_t.get('name')}]({each_sub_technique_id}.md)\n")
+                technique_md_file.write(f"\n\n")
 
-            technique_md_file.write(f"\n\n")
+            if extension_config is not None and extension_config.get('technique_fields').get('examples'):
+                technique_md_file.write(f"**Examples:**\n\n")
+                for each_example in technique.get('examples'):
+                    technique_md_file.write(f"- {each_example}\n")
+                technique_md_file.write(f"\n\n")
 
-            technique_md_file.write(f"**References:**\n\n")
-            for each_reference in technique.get('references'):
-                technique_md_file.write(f"- {each_reference}\n")
-            technique_md_file.write(f"\n\n")
+            if extension_config is not None and extension_config.get('technique_fields').get('CASE_output_classes'):
+                technique_md_file.write(f"**CASE Output Classes:**\n\n")
+                for each_case_class in technique.get('CASE_output_classes'):
+                    technique_md_file.write(f"    - {each_case_class}\n")
+                technique_md_file.write(f"\n\n")
+
+            if extension_config is not None and extension_config.get('technique_fields').get('weaknesses'):
+                technique_md_file.write(f"**Potential weaknesses and mitigations:**\n\n")
+                for weakness_id in technique.get('weaknesses'):
+                    weakness = kb.get_weakness(weakness_id)
+                    if weakness is None:
+                        logging.error(f"Weakness {weakness_id} not found (referred to from {each_technique_id})")
+                        sys.exit(-1)
+
+                    categories_str = get_weakness_categories(weakness)
+
+                    technique_md_file.write(f"- {weakness_id}: {weakness.get('name')} _({categories_str})_\n")
+                    
+                    # This adds all the mitigations
+                    for each_mit in weakness.get('mitigations'):
+                        mitigation = kb.get_mitigation(each_mit)
+                        if mitigation is None:
+                            logging.error(f'Mitigation {each_mit} not found (referred to from weakness {weakness_id})')
+                            sys.exit(-1)
+                        if mitigation.get('technique') is None:
+                            technique_md_file.write(f"    - {each_mit}: {mitigation.get('name')} \n")
+                        else:
+                            technique_md_file.write(f"    - {each_mit}: {mitigation.get('name')} ([{mitigation.get('technique')}]({mitigation.get('technique') +'.md'}))\n")
+                technique_md_file.write(f"\n\n")
+
+            if extension_config is not None and extension_config.get('technique_fields').get('references'):
+                technique_md_file.write(f"**References:**\n\n")
+                for each_reference in technique.get('references'):
+                    technique_md_file.write(f"- {each_reference}\n")
+                technique_md_file.write(f"\n\n")
 
             # Add content from SOLVE-IT Extensions
-            technique_md_file.write(f"{add_markdown_to_technique(each_technique_id)}")
+            technique_md_file.write(f"{solve_it_x.add_markdown_to_technique(each_technique_id)}")
 
             # Write footer with generation timestamp
             technique_md_file.write(f"\n\n---\n\n")
