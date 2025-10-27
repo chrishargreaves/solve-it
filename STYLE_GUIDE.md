@@ -1,9 +1,15 @@
 # SOLVE-IT Style Guide
 
+
+
+
+## General
+* **Spelling**: US English is used throughout.
+  
+  
 ## Style Guide for Objectives
 
 * **Top-level organisation**: Objectives are the top-level grouping of techniques within SOLVE-IT.  
-* **Spelling**: US English is used throughout.
 
 ### **Objective names**
 
@@ -38,4 +44,7 @@
 ##  Style Guide for References
 * Todo
 
+## Glossary
+
+*interpretation* -  "synthesis of an explanation, within agreed limits, for the factual information about evidence resulting from the set of examinations and analyses making up the investigation." (ISO/IEC 27042:2015 )
 
