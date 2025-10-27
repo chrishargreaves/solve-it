@@ -7,6 +7,6 @@
     "subtechniques": [],
     "examples": [],
     "weaknesses": ["W1114"],
-    "CASE_output_classes" : ["observable:Device", "observable:Computer", "observable:MobileDevice", "observable:SmartDevice", "observable:WearableDevice"],
-    "references": ["todo"]
+    "CASE_output_classes" : ["observable:Device", "observable:Computer", "observable:MobileDevice", "observable:SmartDevice", "observable:WearableDevice", "observable:location"],
+    "references": []
 }
