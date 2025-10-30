@@ -112,7 +112,7 @@ if __name__ == '__main__':
     for i, each_technique in enumerate(sorted(kb.list_techniques())):
         if each_technique != "T1000":
             techniques_sheet.write_url(i, 0, 'internal:{}!A1'.format(each_technique),
-                                             string=each_technique, cell_format=the_format)
+                                             string=each_technique)
             techniques_sheet.write_string(i, 1, kb.get_technique(each_technique).get('name'))
             techniques_sheet.write_number(i, 2, len(kb.get_technique(each_technique).get('weaknesses', [])))
             total_mits = 0
