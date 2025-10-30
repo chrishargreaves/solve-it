@@ -93,6 +93,7 @@ if __name__ == '__main__':
 
     info_sheet = workbook.add_worksheet(name='Info')
     techniques_sheet = workbook.add_worksheet(name='Techniques')
+    techniques_sorted_sheet = workbook.add_worksheet(name='Techniques (sorted)')
     weaknesses_sheet = workbook.add_worksheet(name='Weaknesses')
     mitigations_sheet = workbook.add_worksheet(name='Mitigations')
 
@@ -126,6 +127,59 @@ if __name__ == '__main__':
             techniques_sheet.write_number(i, 3, total_mits)
 
     print("- populated 'all techniques' worksheet")
+
+    # Adds all the techniques to the sorted technique list sheet
+    techniques_sorted_sheet.write_string(0, 0, "Objective")
+    techniques_sorted_sheet.write_string(0, 1, "ID")
+    techniques_sorted_sheet.write_string(0, 2, "Name")
+    techniques_sorted_sheet.write_string(0, 3, "Description")
+
+    techniques_sorted_sheet.set_column(0, 0, 50)
+    techniques_sorted_sheet.set_column(2, 2, 50)
+    techniques_sorted_sheet.set_column(3, 3, 100)
+
+    objectives = kb.list_objectives()
+    i = 1
+    for each_objective in objectives:
+        for each_technique_id in each_objective.get('techniques'):
+            t = kb.get_technique(each_technique_id)
+
+            techniques_sorted_sheet.write_string(i, 0, each_objective.get('name'))
+            techniques_sorted_sheet.write_url(i, 1, 'internal:{}!A1'.format(each_technique_id), string=each_technique_id)
+            techniques_sorted_sheet.write_string(i, 2, kb.get_technique(each_technique_id).get('name'))
+            techniques_sorted_sheet.write_string(i, 3, kb.get_technique(each_technique_id).get('description'))            
+            i = i + 1
+
+            # process subtechniques too
+            for each_sub_id in t.get('subtechniques'):
+                s = kb.get_technique(each_sub_id)                
+                techniques_sorted_sheet.write_string(i, 0, each_objective.get('name'))
+                techniques_sorted_sheet.write_url(i, 1, 'internal:{}!A1'.format(each_sub_id), string=each_sub_id + '(s)')
+                techniques_sorted_sheet.write_string(i, 2, kb.get_technique(each_sub_id).get('name'))
+                techniques_sorted_sheet.write_string(i, 3, kb.get_technique(each_sub_id).get('description'))            
+                i = i + 1
+
+    print("- populated 'all techniques (sorted)' worksheet")
+
+
+    for i, each_technique in enumerate(sorted(kb.list_techniques())):
+        if each_technique != "T1000":
+            techniques_sheet.write_url(i, 0, 'internal:{}!A1'.format(each_technique),
+                                             string=each_technique)
+            techniques_sheet.write_string(i, 1, kb.get_technique(each_technique).get('name'))
+            techniques_sheet.write_number(i, 2, len(kb.get_technique(each_technique).get('weaknesses', [])))
+            total_mits = 0
+            for each_weakness in kb.get_technique(each_technique).get('weaknesses', []):
+                weakness_obj = kb.get_weakness(each_weakness)
+                if weakness_obj is None:
+                    logging.error(f'Weakness {each_weakness} not found for technique {each_technique} - Excel generation failed')
+                    sys.exit(-1)
+                else:
+                    total_mits += len(weakness_obj.get('mitigations', []))
+            techniques_sheet.write_number(i, 3, total_mits)
+
+    print("- populated 'all techniques' worksheet")
+
 
     # Adds all the weaknesses to the main weakness sheet
     for i, each_weakness in enumerate(sorted(kb.list_weaknesses())):
