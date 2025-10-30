@@ -138,6 +138,29 @@ def add_html_to_mitigation(m_id):
     return ""
 
 
-def edit_excel():
-    pass
+def edit_excel_technique(t_id, workbook, worksheet, start_row):
+    logging.debug('Called solve-it-x technique Excel code')    
+
+    project_root = Path(__file__).parent.parent
+    extension_config = get_extension_config(project_root)
+
+    if extension_config is None:
+        return worksheet
+
+    if len(extension_config.get('extensions')) > 0:
+        bold_format2 = workbook.add_format()
+        bold_format2.set_bold()
+        bold_format2.set_text_wrap()
+        worksheet.write_string(start_row, 0, "SOLVE-IT-X:", cell_format=bold_format2)
+
+    for each_extension in extension_config.get('extensions'):
+        extension_folder = extension_config.get('extensions').get(each_extension).get('folder_path')
+
+        extension_module = load_extension_module(extension_folder, project_root)
+
+        if hasattr(extension_module, 'get_excel_for_technique'):
+            worksheet = extension_module.get_excel_for_technique(t_id, worksheet, start_row+2)
+
+    return worksheet
+
 

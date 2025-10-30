@@ -8,6 +8,7 @@ import pprint
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from solve_it_library import KnowledgeBase, SOLVEITDataError
+import solve_it_library.solve_it_x as solve_it_x
 
 # Configure logging to show info and errors to console
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -479,6 +480,14 @@ if __name__ == '__main__':
             worksheet.write_string(refs_start + i, 1, each_reference, cell_format=technique_list_format)
             worksheet.write_string(refs_start + i, 8, str(references.get(each_reference)), cell_format=technique_list_format)
             i += 1
+
+        final_row = refs_start + i
+
+        # Handle adding data from SOLVE-IT-X      
+        worksheet = solve_it_x.edit_excel_technique(each_technique_id, workbook, worksheet, start_row=final_row + 2)
+        
+        logging.debug(f'Completed editing of worksheet for {each_technique_id}')
+
     print("- all individual techniques worksheets updated")
 
 
