@@ -1,6 +1,6 @@
 ID	Name	Description	Synonyms
 T1001	Triage	Digital forensic triage is a partial forensic examination conducted under (significant) time and resource constraints. (Roussev et al 2013).	[]
-T1002	Disk imaging	Copying of sectors from a storage media, typically LBA0 to LBAmax into an imaging format. The could be from a traditional hard disk, SSD, USB stick, or data from an eMMC chip that has been desoldered and placed in a reader. 	[]
+T1002	Disk imaging	Copying of sectors from a storage media, typically LBA~0~ to LBA~max~ into an imaging format. The could be from a traditional hard disk, SSD, USB stick, or data from an eMMC chip that has been desoldered and placed in a reader. 	[]
 T1003	Memory imaging	Involves creating a copy of the live memory data of a running system	['RAM dump', 'RAM imaging', 'memory dump']
 T1004	Selective data acquisition	Previewing a data source and selecting a subset of the data for collection into a container such as a tar/zip file or a forensic image format.	['Logical imaging']
 T1005	Crime scene searching	TODO	[]
