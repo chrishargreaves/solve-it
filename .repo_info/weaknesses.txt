@@ -249,3 +249,4 @@ W1253	Recovered (non-allocated) file content has been overwritten by the content
 W1254	Recovered (non-allocated) file content is incorrect due to an incorrect assumption that the file was contiguous e.g. some residual file metadata exists, but not the full reassembly information
 W1255	Recovered file content is incorrect due to incorrect parsing of file size information that records allocated but unwritten sectors (e.g. Valid Data Length (VDL)
 W1256	Incorrect attribution of metadata to file content that was the result of 'file tunnelling'
+W1257	Missing content that is relevant to a keyword search but it has not been extracted as 'artifacts'

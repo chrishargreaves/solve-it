@@ -146,3 +146,4 @@ T1147	Browser cookie examination
 T1148	Browser web storage examination	
 T1149	File versioning feature examination	
 T1150	Recover non-allocated files using residual file metadata	
+T1151	Keyword search (over extracted artifacts)	

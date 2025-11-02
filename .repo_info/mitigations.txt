@@ -194,3 +194,5 @@ M1197	Check if file being recovered is resident (applicable on some file systems
 M1198	Check if file system and operating system make use of an 'allocated but unwritten' value e.g. VDL.
 M1199	Check all relevant file size metadata values when recovering file content
 M1200	Ensure that inconsistencies between allocated data size and data written size are clearly flagged.
+M1203	Use indexed keyword search over broader content of the data source (T1124)
+M1204	Use live keyword search over broader content of the data source (T1125)
