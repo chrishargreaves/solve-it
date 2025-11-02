@@ -132,8 +132,8 @@ W1130	Missing assignment of a file type: reporting a file as unknown when it has
 W1131	Missing recognition of multiple file types: reporting a file as a limited set of types, or a single type, when it can be interpreted as having more than one, such as a GIF and Java Jar	X		X			
 W1132	Incorrectly computing the hash of one or more files within a disk image due to incorrect hash algorithm implementation			X	X		
 W1133	Tool fails to express uncertainty in the classification of file recovery results, e.g., where content may be partly overwritten.						X
-W1134	File metadata and name of a non-allocated file are recovered, but the content is fragmented/overwritten, but is still presented as the content of the recovered file			X			X
-W1135	File metadata and name of a non-allocated file are recovered, but its content has been overwritten by a newer file, but the non-allocated file's content is presented as this newer file's data			X			X
+W1134	Recovered (non-allocated) file content has been overwritten by the content of a newer, but also non-allocated file (which has residual file system information) but this is not detected 			X			X
+W1135	Recovered (non-allocated) file content has been overwritten by the content of a newer live file but this is not detected 			X			X
 W1136	Not recovering data from a failed hard drive	x					
 W1137	Failing to determine password as it is not in the dictionary used	X					
 W1138	Failing to identify password in the time available	X					
@@ -245,3 +245,7 @@ W1249	Missing a web browser profile as it was stored outside of the usual browse
 W1250	Incomplete browser activity extraction due to not considering the browser cache artifacts	X					
 W1251	Incomplete browser activity extraction due to failure to consider multiple profiles	X					
 W1252	Assuming that data stored in the cache was viewed by the user			X			X
+W1253	Recovered (non-allocated) file content has been overwritten by the content of a newer, but also non-allocated file which does not have any residual file system information			X			X
+W1254	Recovered (non-allocated) file content is incorrect due to an incorrect assumption that the file was contiguous e.g. some residual file metadata exists, but not the full reassembly information		X				
+W1255	Recovered file content is incorrect due to incorrect parsing of file size information that records allocated but unwritten sectors (e.g. Valid Data Length (VDL)		X				
+W1256	Incorrect attribution of metadata to file content that was the result of 'file tunnelling'			X			X

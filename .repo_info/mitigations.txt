@@ -189,3 +189,8 @@ M1192	Examine browser configuration to determine history retention settings (T11
 M1193	Obtain older versions of browser history files from backups or from file system versioning features
 M1194	Consider carefully page titles and other details associated with older web history visits when details are recovered using SQL join queries.
 M1195	Also examine browser cache to confirm details about an older web visit when details are recovered using SQL join queries. (T1138)
+M1196	Check if file being recovered is smaller than a block
+M1197	Check if file being recovered is resident (applicable on some file systems)
+M1198	Check if file system and operating system make use of an 'allocated but unwritten' value e.g. VDL.
+M1199	Check all relevant file size metadata values when recovering file content
+M1200	Ensure that inconsistencies between allocated data size and data written size are clearly flagged.

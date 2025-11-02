@@ -58,8 +58,8 @@ T1056	Entity connection enumeration
 T1057	Search for indicators of steganography	
 T1058	Search for mismatched file extensions	
 T1059	Identify partitions	
-T1060	Process file system structures	
-T1061	Non-allocated file recovery	
+T1060	Enumerate allocated files and folders	
+T1061	Recover non-allocated files	
 T1062	Decryption of encrypted file systems/volumes	
 T1063	Identify file types	
 T1064	File carving	
@@ -145,3 +145,4 @@ T1146	Browser synchronization feature examination
 T1147	Browser cookie examination	
 T1148	Browser web storage examination	
 T1149	File versioning feature examination	
+T1150	Recover non-allocated files using residual file metadata	
