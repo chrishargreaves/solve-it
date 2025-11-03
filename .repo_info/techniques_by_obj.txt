@@ -1,0 +1,149 @@
+Objective	ID	Name
+Find potential digital evidence sources	T1005	Crime scene searching
+Find potential digital evidence sources	T1006	Digital sniffer dogs
+Find potential digital evidence sources	T1009	Locate cloud account identifiers
+Find potential digital evidence sources	T1008	Profiling network traffic
+Find potential digital evidence sources	T1007	SyncTriage-based approach
+Prioritize digital evidence sources	T1001	Triage
+Preserve digital evidence	T1011	Store seized devices in evidence bags
+Preserve digital evidence	T1010	Place device in faraday environment
+Preserve digital evidence	T1012	Hardware write blockers
+Preserve digital evidence	T1013	Software write blockers
+Preserve digital evidence	T1110	Preserving reference data
+Acquire data	T1112	Physical disk identification and removal
+Acquire data	T1113	Access internal storage via bootable environment
+Acquire data	T1111	Recording system clock offset
+Acquire data	T1028	Chip-off
+Acquire data	T1029	Data read from desoldered eMMC
+Acquire data	T1030	Data read from unmanaged NAND
+Acquire data	T1027	Data read using JTAG
+Acquire data	T1002	Disk imaging
+Acquire data	T1003	Memory imaging
+Acquire data	T1114	Memory Acquisition via Cold Boot Attack
+Acquire data	T1016	Live data collection
+Acquire data	T1019	Mobile backup extraction
+Acquire data	T1020	Mobile file system extraction
+Acquire data	T1022	Mobile device screenshot based capture
+Acquire data	T1023	Cloud data collection using account details
+Acquire data	T1024	Cloud data collection via request
+Acquire data	T1018	Remote data collection
+Acquire data	T1017	Network packet capture
+Acquire data	T1104	Collect data using open source intelligence
+Acquire data	T1004	Selective data acquisition
+Acquire data	T1015	Privacy preserving selective extraction
+Acquire data	T1025	Writing data to a forensic image format
+Acquire data	T1026	Writing data in standard archive format
+Gain access	T1039	App downgrade
+Gain access	T1034	Brute force attack
+Gain access	T1035	Dictionary attack
+Gain access	T1033	Extraction of account details from an accessible device
+Gain access	T1031	Key recovery from memory
+Gain access	T1041	Pin2Pwn
+Gain access	T1038	Rainbow tables
+Gain access	T1032	Side channel
+Gain access	T1036	Smudge attack
+Gain access	T1037	Obtain password from suspect
+Gain access	T1040	Use mobile device exploit
+Read data from digital evidence storage formats	T1045	Decode standard archive format
+Read data from digital evidence storage formats	T1042	Disk image hash verification
+Read data from digital evidence storage formats	T1043	Forensic image format decoding
+Read data from digital evidence storage formats	T1044	Mobile backup decoding
+Read data from digital evidence storage formats	T1102	Decode data from image from unmanaged NAND
+Reduce data under consideration	T1047	Hash matching (reduce)
+Reduce data under consideration	T1048	Privacy protection via partial processing
+Reduce data under consideration	T1046	Privileged material protection
+Access partitions, volumes and file systems data	T1062	Decryption of encrypted file systems/volumes
+Access partitions, volumes and file systems data	T1061	Recover non-allocated files
+Access partitions, volumes and file systems data	T1150	Recover non-allocated files using residual file metadata (s)
+Access partitions, volumes and file systems data	T1064	File carving (s)
+Access partitions, volumes and file systems data	T1063	Identify file types
+Access partitions, volumes and file systems data	T1059	Identify partitions
+Access partitions, volumes and file systems data	T1060	Enumerate allocated files and folders
+Extract artifacts stored by the operating system	T1067	Cloud synchronisation feature examination (OS)
+Extract artifacts stored by the operating system	T1065	Content indexer examination (OS)
+Extract artifacts stored by the operating system	T1097	Installed programs identification (OS)
+Extract artifacts stored by the operating system	T1066	Log file examination (OS)
+Extract artifacts stored by the operating system	T1068	Recently used file identification (OS)
+Extract artifacts stored by the operating system	T1096	Run programs identification (OS)
+Extract artifacts stored by the operating system	T1098	User account analysis (OS)
+Extract artifacts stored by the operating system	T1083	Memory examination (OS-level)
+Extract artifacts stored by the operating system	T1116	Determine connected devices
+Extract artifacts stored by the operating system	T1149	File versioning feature examination
+Extract artifacts stored by applications	T1069	Browser examination
+Extract artifacts stored by applications	T1137	Browser history examination (s)
+Extract artifacts stored by applications	T1138	Browser cache examination (s)
+Extract artifacts stored by applications	T1139	Browser session examination (s)
+Extract artifacts stored by applications	T1140	Browser autofill examination (s)
+Extract artifacts stored by applications	T1141	Browser bookmarks examination (s)
+Extract artifacts stored by applications	T1142	Browser downloads examination (s)
+Extract artifacts stored by applications	T1143	Browser configuration examination (s)
+Extract artifacts stored by applications	T1144	Browser profile enumeration (s)
+Extract artifacts stored by applications	T1145	Browser extensions examination (s)
+Extract artifacts stored by applications	T1146	Browser synchronization feature examination (s)
+Extract artifacts stored by applications	T1147	Browser cookie examination (s)
+Extract artifacts stored by applications	T1148	Browser web storage examination (s)
+Extract artifacts stored by applications	T1073	Calendar app examination
+Extract artifacts stored by applications	T1072	Chat app examination
+Extract artifacts stored by applications	T1078	Cloud sync app examination
+Extract artifacts stored by applications	T1070	Email examination
+Extract artifacts stored by applications	T1075	Maps/travel app examination
+Extract artifacts stored by applications	T1077	Photos app examination
+Extract artifacts stored by applications	T1074	Social network app examination
+Extract artifacts stored by applications	T1105	Memory examination (application-level)
+Extract artifacts stored by applications	T1107	Health/Fitness app examination
+Extract artifacts stored by applications	T1108	Reminders app examination
+Extract artifacts stored by applications	T1109	Payment app examination
+Extract artifacts stored by applications	T1133	AI companion app examination
+Extract artifacts, or content of specific types	T1021	Configuration file examination
+Extract artifacts, or content of specific types	T1071	Database examination
+Extract artifacts, or content of specific types	T1076	Log file examination
+Extract artifacts, or content of specific types	T1100	EXIF data extraction
+Extract artifacts, or content of specific types	T1099	File repair with grafting
+Extract artifacts, or content of specific types	T1052	Timeline generation
+Extract artifacts, or content of specific types	T1053	Entity extraction
+Extract artifacts, or content of specific types	T1056	Entity connection enumeration
+Extract artifacts, or content of specific types	T1120	Automated artifact extraction
+Locate potentially relevant content	T1051	Fuzzy hash matching
+Locate potentially relevant content	T1050	Hash matching (locate)
+Locate potentially relevant content	T1049	Keyword searching
+Locate potentially relevant content	T1125	Keyword search (live) (s)
+Locate potentially relevant content	T1126	Keyword search (live) (physical) (s)
+Locate potentially relevant content	T1127	Keyword search (live) (logical) (s)
+Locate potentially relevant content	T1124	Keyword search (indexed) (s)
+Locate potentially relevant content	T1121	Keyword indexing (s)
+Locate potentially relevant content	T1122	Keyword search (case-type wordlists) (s)
+Locate potentially relevant content	T1123	Keyword search (case-specific wordlists) (s)
+Locate potentially relevant content	T1151	Keyword search (over extracted artifacts) (s)
+Locate potentially relevant content	T1118	Locate relevant files by path
+Locate potentially relevant content	T1086	Timeline analysis
+Review content for relevance	T1054	Manual content review for relevant material
+Review content for relevance	T1055	File system content inspection
+Review content for relevance	T1079	Audio content analysis
+Review content for relevance	T1080	Video content analysis
+Review content for relevance	T1106	Deep fake detection (video) (s)
+Review content for relevance	T1081	Image content analysis
+Review content for relevance	T1082	Document content analysis
+Detect anti-forensics and other anomalies	T1057	Search for indicators of steganography
+Detect anti-forensics and other anomalies	T1058	Search for mismatched file extensions
+Detect anti-forensics and other anomalies	T1128	Search for indicators of malware
+Detect anti-forensics and other anomalies	T1129	Search for indicators of clock tampering
+Detect anti-forensics and other anomalies	T1130	Search for indicators of encrypted data
+Detect anti-forensics and other anomalies	T1131	Search for indicators of trail obfuscation
+Detect anti-forensics and other anomalies	T1132	Search for indicators of artifact wiping
+Establish identities	T1084	Extraction of user accounts
+Establish identities	T1085	Identify conflation
+Create visualizations	T1103	Virtualise suspect system for previewing
+Create visualizations	T1115	Visualisation of geolocation information
+Reconstruct events	T1087	Location-based event reconstruction
+Reconstruct events	T1088	Connection-based event reconstruction
+Reconstruct events	T1117	Time-based event reconstruction
+Conduct research	T1090	Experimentation
+Conduct research	T1095	Instrumentation
+Conduct research	T1089	Source code review
+Conduct research	T1101	Cell site survey
+Conduct research	T1119	Automatically scan for artifact changes caused by app updates
+Produce documentation	T1091	Bookmark artifacts
+Produce documentation	T1094	Disclosure
+Produce documentation	T1092	Produce bookmark-based automated report
+Produce documentation	T1093	Write expert report
+Produce documentation	T1014	Chain of custody documentation
