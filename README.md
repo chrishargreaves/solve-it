@@ -15,15 +15,6 @@ This is a community project so please see [CONTRIBUTING.md](CONTRIBUTING.md) for
 <img width="2554" height="1384" alt="A view of one of the techniques (T1002: Disk Imaging), illustrating the fields recorded for each technique including weaknesses and mitigations." src="https://github.com/user-attachments/assets/fbf0f312-9c5d-41c5-81bc-442162854643" />
 
 
-
-## Related repositories
-
-- educational material for SOLVE-IT can be found [here](https://github.com/SOLVE-IT-DF/solve-it-education)
-   - includes presentations, class exercises, one-page primer, contributing guide for digital forensics researchers.
-- example uses of SOLVE-IT can be found [here](https://github.com/SOLVE-IT-DF/solve-it-examples), 
-- a repository that uses SOLVE-IT to consider applications of AI to digital forensics can be found [here](https://github.com/SOLVE-IT-DF/solve-it-applications-ai-review)
-- an MCP server providing LLM access to SOLVE-IT [here](https://github.com/CKE-Proto/solve_it_mcp) 
-
 ## Concepts and structure
 The high-level concepts are:
 
@@ -38,21 +29,45 @@ The high-level concepts are:
 
 Each of these concepts are contained in subfolders within the [\data](https://github.com/SOLVE-IT-DF/solve-it/tree/main/data) subfolder. Each technique, weakness, and mitigation is represented as a JSON file that can be directly viewed.
 
-## Viewing the knowledge base in a spreadsheet
+
+
+## Viewing the knowledge base 
+
+### Viewing as Markdown
+
+A markdown version of the knowledge base is generated with every commit. You can therefore find the most up-to-date version in the `.repo_info` folder [here](https://github.com/SOLVE-IT-DF/solve-it/blob/main/.repo_info/solve-it.md). 
+
+This markdown version is produced automatically using `reporting_scripts/generate_md_from_kb.py` (requires python >=3.12), and this can be run manually if required. 
+
+### Viewing in Excel
 
 Pre-generated xlsx files can be found in the [releases](https://github.com/SOLVE-IT-DF/solve-it/releases) section, published at regular intervals. 
 
-Alternatively the repository is configured to compile a new version of the Excel spreadsheet with every commit. You can therefore find the most up-to-date version [here](https://github.com/SOLVE-IT-DF/solve-it/blob/main/.repo_info/solve-it-latest.xlsx).
+Alternatively the repository is configured to compile a new version of the Excel spreadsheet with every commit. You can therefore find the most up-to-date version in the `.repo_info` folder [here](https://github.com/SOLVE-IT-DF/solve-it/blob/main/.repo_info/solve-it-latest.xlsx).
 
-If you want to generate your own from the raw data (useful if you are adding or editing content), a utility script is provided, `reporting_scripts/generate_excel_from_kb.py`. This python3 script (requires python >=3.12) will generate an Excel spreadsheet (solve-it.xlsx) based on the current version of the JSON data (using the solve-it.json categorisations). This uses the Python xlsxwriter package. 
-
+If you want to generate your own from the raw data (which is useful if you are adding or editing content), a utility script is provided, `reporting_scripts/generate_excel_from_kb.py`. This python3 script (requires python >=3.12) will generate an Excel spreadsheet (solve-it.xlsx) based on the current version of the JSON data (using the solve-it.json categorisations). This uses the Python xlsxwriter package. 
 
 Another utility script `reporting_scripts/generate_evaluation.py` can be used with a list of technique IDs provided as command line arguments. This provides a repackaged checklist of the supplied techniques, with their weaknesses and potential mitigations. This can be used to review a case, an SOP, a tool workflow, and more. See example in [SOLVE-IT examples repository](https://github.com/SOLVE-IT-DF/solve-it-examples/tree/main/forensic_workflow_example_forensic_imaging).
 
+### Viewing as JSON
+
+The raw repository JSON files can be viewed in the `data` folder [here](https://github.com/SOLVE-IT-DF/solve-it/tree/main/data), under the subfolders `techniques`, `weaknesses` and `mitigations`.
+
+
 ## Organisation of the techniques
-The file `solve-it.json` is the default categorisation of the techniques, but other examples are provided in `carrier.json` and `dfrws.json`.
+The file `solve-it.json` is the default categorisation of the techniques, but other examples are provided in `carrier.json` and `dfrws.json` (but these other examples are not maintained since the original release). 
+
+
+
+## Related repositories
+
+- educational material for SOLVE-IT can be found [here](https://github.com/SOLVE-IT-DF/solve-it-education)
+   - includes presentations, class exercises, one-page primer, contributing guide for digital forensics researchers.
+- example uses of SOLVE-IT can be found [here](https://github.com/SOLVE-IT-DF/solve-it-examples), 
+- a repository that uses SOLVE-IT to consider applications of AI to digital forensics can be found [here](https://github.com/SOLVE-IT-DF/solve-it-applications-ai-review)
+- an MCP server providing LLM access to SOLVE-IT [here](https://github.com/CKE-Proto/solve_it_mcp) 
 
 
 ## Contributing to the knowledge base
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for information.
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) for information, which includes an in progress [style guide](https://github.com/SOLVE-IT-DF/solve-it/blob/main/STYLE_GUIDE.md).
