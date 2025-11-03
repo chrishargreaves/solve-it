@@ -39,6 +39,12 @@ jobs:
         python reporting_scripts/generate_tsv_from_kb.py -m > .repo_info/mitigations.txt
         python reporting_scripts/generate_tsv_from_kb.py -c > .repo_info/CASE_mapping.txt
         python reporting_scripts/generate_excel_from_kb.py -o .repo_info/solve-it-latest.xlsx
+        python reporting_scripts/generate_md_from_kb.py -o .repo_info/solve-it.md
+    - name: Run these to make sure nothing breaks
+      run: |
+        python reporting_scripts/generate_evaluation.py -o .repo_info/test_eval.xlxs
+        python reporting_scripts/generate_evaluation.py T1012 T1002 T1025 T1042 -o .repo_info/test_eval2.xlxs
+        
     - name: Commit and push changes
       run: |
         git config --global user.name "github-actions[bot]"
@@ -53,7 +59,9 @@ jobs:
         git add .repo_info/mitigations.txt
         git add .repo_info/CASE_mapping.txt
         git add .repo_info/solve-it-latest.xlsx
-        git commit -m "Update .repo_info [skip ci]" || echo "No changes to commit"
+        git add .repo_info/solve-it-latest.md
+        git add .repo_info/md_content/*
+        git commit -m "Automated update to .repo_info folder [skip ci]" || echo "No changes to commit"
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
