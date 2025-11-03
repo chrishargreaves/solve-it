@@ -59,7 +59,7 @@ jobs:
         git add .repo_info/mitigations.txt
         git add .repo_info/CASE_mapping.txt
         git add .repo_info/solve-it-latest.xlsx
-        git add .repo_info/solve-it-latest.md
+        git add .repo_info/solve-it.md
         git add .repo_info/md_content/*
         git commit -m "Automated update to .repo_info folder [skip ci]" || echo "No changes to commit"
         git push
