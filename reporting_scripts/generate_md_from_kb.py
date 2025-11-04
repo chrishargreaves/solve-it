@@ -8,6 +8,7 @@ import datetime
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from solve_it_library import KnowledgeBase, SOLVEITDataError
 import solve_it_library.solve_it_x as solve_it_x
+import extension_data.global_solveit_config as global_solveit_config
 
 
 def main():
@@ -157,13 +158,19 @@ def create_main_markdown(kb, outpath):
                 if technique is None:
                     logging.error(f"Technique {each_technique_id} not found in knowledge base, exiting")
                     sys.exit(-1)
-                mdfile.write(f"- [{each_technique_id} - {technique.get('name')}](md_content/{each_technique_id}.md)\n" )
+
+                # Get color for this technique
+                color = global_solveit_config.get_colour_for_technique(kb, each_technique_id)
+                mdfile.write(f"- <span style=\"background-color: {color}; padding: 8px 10px; border-radius: 2px; display: inline-block;\"> </span> [{each_technique_id} - {technique.get('name')}](md_content/{each_technique_id}.md)\n" )
                 for each_sub_technique_id in technique.get('subtechniques'):
                     sub_t = kb.get_technique(each_sub_technique_id)
                     if sub_t is None:
                         logging.error(f'Subtechnique {each_sub_technique_id} not found (referred to from {each_technique_id})')
                         sys.exit(-1)
-                    mdfile.write(f"    - [{each_sub_technique_id} - {sub_t.get('name')}](md_content/{each_sub_technique_id}.md)\n" )
+
+                    # Get color for this subtechnique
+                    sub_color = global_solveit_config.get_colour_for_technique(kb, each_sub_technique_id)
+                    mdfile.write(f"    - <span style=\"background-color: {sub_color}; padding: 8px 10px; border-radius: 2px; display: inline-block;\"> </span> [{each_sub_technique_id} - {sub_t.get('name')}](md_content/{each_sub_technique_id}.md)\n" )
 
         # Write footer with generation timestamp
         generation_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -209,7 +216,10 @@ def write_all_technique_files(kb, outpath, extension_config):
                     if sub_t is None:
                         logging.error(f'Subtechnique {each_sub_technique_id} not found (referred to from {each_technique_id})')
                         sys.exit(-1)
-                    technique_md_file.write(f"- [{each_sub_technique_id} - {sub_t.get('name')}]({each_sub_technique_id}.md)\n")
+
+                    # Get color for this subtechnique
+                    sub_color = global_solveit_config.get_colour_for_technique(kb, each_sub_technique_id)
+                    technique_md_file.write(f"- <span style=\"background-color: {sub_color}; padding: 8px 10px; border-radius: 2px; display: inline-block;\"> </span> [{each_sub_technique_id} - {sub_t.get('name')}]({each_sub_technique_id}.md)\n")
                 technique_md_file.write(f"\n\n")
 
             if extension_config is not None and extension_config.get('technique_fields').get('examples'):

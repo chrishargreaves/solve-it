@@ -9,6 +9,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from solve_it_library import KnowledgeBase, SOLVEITDataError
 import solve_it_library.solve_it_x as solve_it_x
+import extension_data.global_solveit_config as global_solveit_config
 
 # Configure logging to show info and errors to console
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -309,12 +310,22 @@ if __name__ == '__main__':
                 # Performs the formatting based on if weaknesses are present or not
                 try:
                     row = objectives_row_indexes[objective] + 1
-                    if len(each_technique['weaknesses']) == 0:
-                        the_format = technique_format
-                    else:
-                        the_format = technique_format2
+
+                    if len(each_technique['weaknesses']) > 0:
                         total_techniques_with_weaknesses += 1
 
+                    # Create a new format for each cell to have its own independent color
+                    the_format = workbook.add_format()
+                    the_format.set_bold(False)
+                    the_format.set_align('vcenter')
+                    the_format.set_align('center')
+                    the_format.set_border(style=1)
+                    the_format.set_text_wrap()
+
+                    # Fetch colour to use using global extension configuration...
+                    the_format.set_bg_color(global_solveit_config.get_colour_for_technique(kb, each_technique_id))
+                    print(the_format.bg_color)
+                        
                     main_worksheet.write_url(row, column, 'internal:{}!A1'.format(each_technique_id),
                                              string=technique_name + '\n' + each_technique_id,
                                              cell_format=the_format)
