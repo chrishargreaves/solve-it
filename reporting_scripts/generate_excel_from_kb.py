@@ -324,7 +324,6 @@ if __name__ == '__main__':
 
                     # Fetch colour to use using global extension configuration...
                     the_format.set_bg_color(global_solveit_config.get_colour_for_technique(kb, each_technique_id))
-                    print(the_format.bg_color)
                         
                     main_worksheet.write_url(row, column, 'internal:{}!A1'.format(each_technique_id),
                                              string=technique_name + '\n' + each_technique_id,
