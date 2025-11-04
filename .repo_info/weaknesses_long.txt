@@ -250,3 +250,4 @@ W1254	Recovered (non-allocated) file content is incorrect due to an incorrect as
 W1255	Recovered file content is incorrect due to incorrect parsing of file size information that records allocated but unwritten sectors (e.g. Valid Data Length (VDL)		X				
 W1256	Incorrect attribution of metadata to file content that was the result of 'file tunnelling'			X			X
 W1257	Missing content that is relevant to a keyword search but it has not been extracted as 'artifacts'	X					
+W1259	Image format parsing fails to identify or assemble split forensic images	x				x	
