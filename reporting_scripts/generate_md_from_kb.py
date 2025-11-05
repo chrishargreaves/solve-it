@@ -159,14 +159,14 @@ def create_main_markdown(kb, outpath):
                     logging.error(f"Technique {each_technique_id} not found in knowledge base, exiting")
                     sys.exit(-1)
 
-                mdfile.write(f"- [{global_solveit_config.get_technique_prefix(kb, each_technique_id)}{each_technique_id} - {technique.get('name')}](md_content/{each_technique_id}.md){global_solveit_config.get_technique_suffix(kb, each_technique_id)}\n" )
+                mdfile.write(f"- {global_solveit_config.get_technique_prefix(kb, each_technique_id)}[{each_technique_id} - {technique.get('name')}](md_content/{each_technique_id}.md){global_solveit_config.get_technique_suffix(kb, each_technique_id)}\n" )
                 for each_sub_technique_id in technique.get('subtechniques'):
                     sub_t = kb.get_technique(each_sub_technique_id)
                     if sub_t is None:
                         logging.error(f'Subtechnique {each_sub_technique_id} not found (referred to from {each_technique_id})')
                         sys.exit(-1)
 
-                    mdfile.write(f"    - [{global_solveit_config.get_technique_prefix(kb, each_technique_id)}{each_sub_technique_id} - {sub_t.get('name')}](md_content/{each_sub_technique_id}.md){global_solveit_config.get_technique_suffix(kb, each_technique_id)}\n" )
+                    mdfile.write(f"    - {global_solveit_config.get_technique_prefix(kb, each_technique_id)}[{each_sub_technique_id} - {sub_t.get('name')}](md_content/{each_sub_technique_id}.md){global_solveit_config.get_technique_suffix(kb, each_technique_id)}\n" )
 
         # Write footer with generation timestamp
         generation_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
