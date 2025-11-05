@@ -14,6 +14,27 @@ import extension_data.global_solveit_config as global_solveit_config
 # Configure logging to show info and errors to console
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
+def lighten_color(hex_color, factor=0.5):
+    """
+    Lighten a hex color by a factor (0.0 to 1.0)
+    factor=0.5 means 50% lighter (halfway to white)
+    """
+    # Remove the # if present
+    hex_color = hex_color.lstrip('#')
+
+    # Convert to RGB
+    r = int(hex_color[0:2], 16)
+    g = int(hex_color[2:4], 16)
+    b = int(hex_color[4:6], 16)
+
+    # Lighten by moving towards 255 (white)
+    r = int(r + (255 - r) * factor)
+    g = int(g + (255 - g) * factor)
+    b = int(b + (255 - b) * factor)
+
+    # Convert back to hex
+    return f"#{r:02X}{g:02X}{b:02X}"
+
 def format_headings_in_workbook(workbook, objectives):
     header_format = workbook.add_format()
     header_format.set_bold()
@@ -339,10 +360,22 @@ if __name__ == '__main__':
                             raise ValueError(f'Subtechnqiue {each_subtechnique_id} not found (referred to in {each_technique_id}).')
                             sys.exit(-1)
 
+                        # Create a new format for each cell to have its own independent color
+                        the_format_sub = workbook.add_format()
+                        the_format_sub.set_bold(False)
+                        the_format_sub.set_align('vcenter')
+                        the_format_sub.set_align('center')
+                        the_format_sub.set_border(style=1)
+                        the_format_sub.set_text_wrap()
+
+                        # Fetch colour to use using global extension configuration...
+                        base_colour = global_solveit_config.get_colour_for_technique(kb, each_subtechnique_id)
+                        the_format_sub.set_bg_color(lighten_color(base_colour, factor=0.3))
+
 
                         main_worksheet.write_url(row, column, 'internal:{}!A1'.format(each_subtechnique.get('id')),
                                                  string='> ' + each_subtechnique.get('name') + '\n' + each_subtechnique.get('id'),
-                                                 cell_format=sub_technique_format1)
+                                                 cell_format=the_format_sub)
 
                         if len(each_subtechnique.get('subtechniques')) > 0:
                             logging.error(f'Nested subtechniques are not currently supported')
