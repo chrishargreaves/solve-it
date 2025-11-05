@@ -147,7 +147,7 @@ def create_main_markdown(kb, outpath):
 
         mdfile.write(f"# Objectives and Techniques\n" )
 
-        # Write each tactic and its techniques
+        # Write each objective and its techniques
         for objective in kb.list_objectives():
             mdfile.write(f'<a id="{objective_name_to_friendly_id(objective.get('name'))}"></a>\n')
             mdfile.write(f"### {objective.get('name')}\n" )
@@ -159,18 +159,14 @@ def create_main_markdown(kb, outpath):
                     logging.error(f"Technique {each_technique_id} not found in knowledge base, exiting")
                     sys.exit(-1)
 
-                # Get color for this technique
-                color = global_solveit_config.get_colour_for_technique(kb, each_technique_id)
-                mdfile.write(f"- <span style=\"background-color: {color}; padding: 8px 10px; border-radius: 2px; display: inline-block;\"> </span> [{each_technique_id} - {technique.get('name')}](md_content/{each_technique_id}.md)\n" )
+                mdfile.write(f"- [{global_solveit_config.get_technique_prefix(kb, each_technique_id)}{each_technique_id} - {technique.get('name')}](md_content/{each_technique_id}.md){global_solveit_config.get_technique_suffix(kb, each_technique_id)}\n" )
                 for each_sub_technique_id in technique.get('subtechniques'):
                     sub_t = kb.get_technique(each_sub_technique_id)
                     if sub_t is None:
                         logging.error(f'Subtechnique {each_sub_technique_id} not found (referred to from {each_technique_id})')
                         sys.exit(-1)
 
-                    # Get color for this subtechnique
-                    sub_color = global_solveit_config.get_colour_for_technique(kb, each_sub_technique_id)
-                    mdfile.write(f"    - <span style=\"background-color: {sub_color}; padding: 8px 10px; border-radius: 2px; display: inline-block;\"> </span> [{each_sub_technique_id} - {sub_t.get('name')}](md_content/{each_sub_technique_id}.md)\n" )
+                    mdfile.write(f"    - [{global_solveit_config.get_technique_prefix(kb, each_technique_id)}{each_sub_technique_id} - {sub_t.get('name')}](md_content/{each_sub_technique_id}.md){global_solveit_config.get_technique_suffix(kb, each_technique_id)}\n" )
 
         # Write footer with generation timestamp
         generation_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -189,10 +185,7 @@ def write_all_technique_files(kb, outpath, extension_config):
         technique_filepath = os.path.join(os.path.dirname(outpath), 'md_content', each_technique_id + '.md')
         with open(technique_filepath, 'w', encoding='utf-8') as technique_md_file:
             technique_md_file.write(f"[< back to main](../solve-it.md)\n")
-
-            # Get color for this technique
-            color = global_solveit_config.get_colour_for_technique(kb, each_technique_id)
-            technique_md_file.write(f"# <span style=\"background-color: {color}; padding: 12px 14px; border-radius: 2px; display: inline-block; vertical-align: 2px;\"> </span> {each_technique_id}\n\n")
+            technique_md_file.write(f"# {each_technique_id}\n\n")
             
             if extension_config is not None and extension_config.get('technique_fields').get('id'):
                 technique_md_file.write(f"**ID:** {technique.get('id')}\n\n")
@@ -220,9 +213,7 @@ def write_all_technique_files(kb, outpath, extension_config):
                         logging.error(f'Subtechnique {each_sub_technique_id} not found (referred to from {each_technique_id})')
                         sys.exit(-1)
 
-                    # Get color for this subtechnique
-                    sub_color = global_solveit_config.get_colour_for_technique(kb, each_sub_technique_id)
-                    technique_md_file.write(f"- <span style=\"background-color: {sub_color}; padding: 8px 10px; border-radius: 2px; display: inline-block;\"> </span> [{each_sub_technique_id} - {sub_t.get('name')}]({each_sub_technique_id}.md)\n")
+                    technique_md_file.write(f"- [{each_sub_technique_id} - {sub_t.get('name')}]({each_sub_technique_id}.md)\n")
                 technique_md_file.write(f"\n\n")
 
             if extension_config is not None and extension_config.get('technique_fields').get('examples'):
