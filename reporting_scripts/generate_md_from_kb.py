@@ -189,7 +189,10 @@ def write_all_technique_files(kb, outpath, extension_config):
         technique_filepath = os.path.join(os.path.dirname(outpath), 'md_content', each_technique_id + '.md')
         with open(technique_filepath, 'w', encoding='utf-8') as technique_md_file:
             technique_md_file.write(f"[< back to main](../solve-it.md)\n")
-            technique_md_file.write(f"# {each_technique_id}\n\n")
+
+            # Get color for this technique
+            color = global_solveit_config.get_colour_for_technique(kb, each_technique_id)
+            technique_md_file.write(f"# <span style=\"background-color: {color}; padding: 12px 14px; border-radius: 2px; display: inline-block; vertical-align: 2px;\"> </span> {each_technique_id}\n\n")
             
             if extension_config is not None and extension_config.get('technique_fields').get('id'):
                 technique_md_file.write(f"**ID:** {technique.get('id')}\n\n")
