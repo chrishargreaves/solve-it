@@ -13,6 +13,8 @@ def get_colour_for_technique(kb, t_id):
     # technique is)
 
     if len(t.get('weaknesses')) == 0:
-        return "#F8F8F8"
+        return "#F4CCCC" # consider this as placholder
+    elif (t.get('description') is None or t.get('description') == "") or len(kb.get_mit_list_for_technique(t_id)) == 0:
+        return "#FCE5CD" # consider this as partially populated
     else:
-        return "#E9E9E9"
+        return "#D9EAD3" # consider this as a release candidate
