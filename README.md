@@ -53,6 +53,14 @@ Another utility script `reporting_scripts/generate_evaluation.py` can be used wi
 
 The raw repository JSON files can be viewed in the `data` folder [here](https://github.com/SOLVE-IT-DF/solve-it/tree/main/data), under the subfolders `techniques`, `weaknesses` and `mitigations`.
 
+### Notes on color coding
+
+In the Excel and Markdown versions, colors are used to indicate the 'status' of techniques. 
+- Red indicates a _placeholder_ (zero weaknesses added)
+- Yellow indicates _some content_ (1 or more weaknesses, but missing a technique description, or has 0 mitigations)
+- Green indicates _release candidate_ (this cannot be classed as complete, but has 1 or more weaknesses, 1 or more miitgations, and has a description in place)
+
+Note, this is controlled via the `global_solveit_config.py` script in the `extension_data` folder, and this behaviour may be modified by other extensions. 
 
 ## Organisation of the techniques
 The file `solve-it.json` is the default categorisation of the techniques, but other examples are provided in `carrier.json` and `dfrws.json` (but these other examples are not maintained since the original release). 
