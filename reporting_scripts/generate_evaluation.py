@@ -204,11 +204,27 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
     main_worksheet.write_string(1, 6, "Does the forensic tool detect and compensate for missing and corrupted data", header_small_format)
     main_worksheet.write_string(1, 7, "The results are displayed in a manner that encourages, or does not prevent misinterpretation", header_small_format)
 
-    # Write mitigations top header
-    max_mits = kb.get_max_mitigations_per_technique()
+    # Determine which techniques to include (moved here to calculate max_mits correctly)
+    if not techniques:
+        # Use all techniques if none specified
+        techniques_to_print = kb.list_techniques()
+    else:
+        # Use the provided technique IDs
+        techniques_to_print = techniques
+
+    # Calculate max mitigations only for the techniques being evaluated
+    max_mits = 0
+    for tech_id in techniques_to_print:
+        technique = kb.get_technique(tech_id)
+        if technique:
+            num_mits = len(kb.get_mit_list_for_technique(tech_id))
+            if num_mits > max_mits:
+                max_mits = num_mits
+
     print('Max mitigations: {}'.format(max_mits))
     max_letter = xl_col_to_name(8 + max_mits - 1)  # Column I is index 8, so last mitigation column is 8 + max_mits - 1
 
+    # Write mitigations top header
     main_worksheet.merge_range("I1:{}1".format(max_letter), "Potential Mitigations", header_type_format)
     for i in range(0, max_mits):
         main_worksheet.write_string(1, 8 + i, "M{}".format(i), wrapped_title)
@@ -236,14 +252,6 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
     # Format the size of the extra columns at the end
     main_worksheet.set_column(8 + max_mits + 0, 8 + max_mits + 15, 4)
     main_worksheet.set_column(8 + max_mits + 15, 8 + max_mits + 15, 60)
-
-    # Determine which techniques to include
-    if not techniques:
-        # Use all techniques if none specified
-        techniques_to_print = kb.list_techniques()
-    else:
-        # Use the provided technique IDs
-        techniques_to_print = techniques
 
     print(techniques_to_print)
 
@@ -401,9 +409,15 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
                                            8 + max_mits + 4) + str(start_pos + 2) + '', header_type_format)
             
             # Status formula: Shows "x" if there are unmet mitigations (Y=0 and N>0)
-            form = ("=IF(AND(" + xl_col_to_name(8 + max_mits + 0) + str(start_pos + 2) + "=0," + "OR(" +
-                     xl_col_to_name(8 + max_mits + 1) + str(start_pos + 2) + ">0," +
-                     xl_col_to_name(9 + max_mits + 1) + str(start_pos + 2) + ">0)),\"x\",\"\")")
+            # form = ("=IF(AND(" + xl_col_to_name(8 + max_mits + 0) + str(start_pos + 2) + "=0," + "OR(" +
+            #          xl_col_to_name(8 + max_mits + 1) + str(start_pos + 2) + ">0," +
+            #          xl_col_to_name(9 + max_mits + 1) + str(start_pos + 2) + ">0)),\"x\",\"\")")
+            form = ("=IF(AND(" + xl_col_to_name(8 + max_mits + 0) + str(start_pos + 2) + "=0," +
+                    xl_col_to_name(8 + max_mits + 1) + str(start_pos + 2) + "=0," +
+                    xl_col_to_name(9 + max_mits + 1) + str(start_pos + 2) + "=0),\"x!\"," +
+                    "IF(AND(" + xl_col_to_name(8 + max_mits + 0) + str(start_pos + 2) + "=0," +
+                    "OR(" + xl_col_to_name(8 + max_mits + 1) + str(start_pos + 2) + ">0," +
+                    xl_col_to_name(9 + max_mits + 1) + str(start_pos + 2) + ">0)),\"x\",\"\"))")
             main_worksheet.write_formula(start_pos + 1, 8 + max_mits + 6,
                                        form, header_type_format)
 
@@ -411,8 +425,17 @@ def generate_evaluation(techniques=None, lab_config=None, output_file=None, labe
 
         start_pos += 1
 
-    # Hide the risk score calculation columns
-    main_worksheet.set_column("Z:AG", None, None, {"hidden": True})
+    # Hide the summary count columns (Y, N, -, NA, Max)
+    # These are columns (8 + max_mits + 0) through (8 + max_mits + 4)
+    first_hidden_summary_col = xl_col_to_name(8 + max_mits + 0)
+    last_hidden_summary_col = xl_col_to_name(8 + max_mits + 4)
+    main_worksheet.set_column(f"{first_hidden_summary_col}:{last_hidden_summary_col}", None, None, {"hidden": True})
+
+    # Hide the risk score calculation columns (s1, f1, d1, t1, s2, f2, d2, t2)
+    # These are columns (8 + max_mits + 7) through (8 + max_mits + 14)
+    first_hidden_risk_col = xl_col_to_name(8 + max_mits + 7)
+    last_hidden_risk_col = xl_col_to_name(8 + max_mits + 14)
+    main_worksheet.set_column(f"{first_hidden_risk_col}:{last_hidden_risk_col}", None, None, {"hidden": True})
     
 
     logging.info(f'Techniques in lab config: {str(technique_log_list)}')
