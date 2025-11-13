@@ -81,6 +81,7 @@ def main():
     create_main_markdown(kb, outpath)
     
     write_all_technique_files(kb, outpath, extension_config)
+    write_all_weakness_files(kb, outpath, extension_config)
 
     print(f"Markdown file created at: {outpath}")
 
@@ -159,7 +160,9 @@ def create_main_markdown(kb, outpath):
                     logging.error(f"Technique {each_technique_id} not found in knowledge base, exiting")
                     sys.exit(-1)
 
-                mdfile.write(f"- {global_solveit_config.get_technique_prefix(kb, each_technique_id)}[{each_technique_id} - {technique.get('name')}](md_content/{each_technique_id}.md){global_solveit_config.get_technique_suffix(kb, each_technique_id)}\n" )
+                solveitx_technique_content_suffix = solve_it_x.add_markdown_to_technique_preview_suffix(each_technique_id)
+
+                mdfile.write(f"- {global_solveit_config.get_technique_prefix(kb, each_technique_id)}[{each_technique_id} - {technique.get('name')}](md_content/{each_technique_id}.md){global_solveit_config.get_technique_suffix(kb, each_technique_id)}{solveitx_technique_content_suffix}\n" )
                 for each_sub_technique_id in technique.get('subtechniques'):
                     sub_t = kb.get_technique(each_sub_technique_id)
                     if sub_t is None:
@@ -238,7 +241,10 @@ def write_all_technique_files(kb, outpath, extension_config):
 
                     categories_str = get_weakness_categories(weakness)
 
-                    technique_md_file.write(f"- {weakness_id}: {weakness.get('name')} _({categories_str})_\n")
+                    solveitx_weakness_content_prefix = solve_it_x.add_markdown_to_weakness_preview_prefix(weakness_id)
+                    solveitx_weakness_content_suffix = solve_it_x.add_markdown_to_weakness_preview_suffix(weakness_id)                    
+
+                    technique_md_file.write(f"- {solveitx_weakness_content_prefix}[{weakness_id}]({weakness_id}.md): {weakness.get('name')} _({categories_str})_{solveitx_weakness_content_suffix}\n")
                     
                     # This adds all the mitigations
                     for each_mit in weakness.get('mitigations'):
@@ -265,7 +271,49 @@ def write_all_technique_files(kb, outpath, extension_config):
             technique_md_file.write(f"\n\n---\n\n")
             technique_md_file.write(f"*Markdown generated: {generation_time}*\n")
       
-    
+
+def write_all_weakness_files(kb, outpath, extension_config):
+    generation_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    for each_weakness_id in kb.list_weaknesses():
+        weakness = kb.get_weakness(each_weakness_id)
+        if weakness is None:
+            logging.error(f"Weakness {each_weakness_id} not found in knowledge base, exiting")
+            sys.exit(-1)
+        weakness_filepath = os.path.join(os.path.dirname(outpath), 'md_content', each_weakness_id + '.md')
+        with open(weakness_filepath, 'w', encoding='utf-8') as weakness_md_file:
+            weakness_md_file.write(f"[< back to main](../solve-it.md)\n")
+            weakness_md_file.write(f"# {each_weakness_id}\n\n")
+            weakness_md_file.write(f"**Name:** {weakness.get('name')}\n\n")            
+            weakness_md_file.write(f"**Weakness classes:** {get_weakness_categories(weakness)}\n\n")
+            weakness_md_file.write(f"**Details:** {weakness.get('details')}\n\n")
+
+            # This adds all the mitigations
+            weakness_md_file.write(f"**Mitigations:**\n\n")
+            for each_mit in weakness.get('mitigations'):
+                mitigation = kb.get_mitigation(each_mit)
+                if mitigation is None:
+                    logging.error(f'Mitigation {each_mit} not found (referred to from weakness {weakness_id})')
+                    sys.exit(-1)
+                if mitigation.get('technique') is None:
+                    weakness_md_file.write(f"- {each_mit}: {mitigation.get('name')} \n")
+                else:
+                    weakness_md_file.write(f"- {each_mit}: {mitigation.get('name')} ([{mitigation.get('technique')}]({mitigation.get('technique') +'.md'}))\n")
+            weakness_md_file.write(f"\n\n") 
+
+            # This adds all the references
+            weakness_md_file.write(f"**References:**\n\n")
+            for each_reference in weakness.get('references'):
+                weakness_md_file.write(f"- {each_reference}\n")
+            weakness_md_file.write(f"\n\n")
+
+            # Add content from SOLVE-IT Extensions
+            weakness_md_file.write(f"{solve_it_x.add_markdown_to_weakness(each_weakness_id)}")
+
+            # Write footer with generation timestamp
+            weakness_md_file.write(f"\n\n---\n\n")
+            weakness_md_file.write(f"*Markdown generated: {generation_time}*\n")
+
 
 if __name__ == "__main__":
     main()
