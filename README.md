@@ -1,5 +1,10 @@
 # SOLVE-IT (a Systematic Objective-based Listing of Various Established digital Investigation Techniques)
 
+## Quick Links
+- [Browse the knowledge base in markdown](https://github.com/SOLVE-IT-DF/solve-it/blob/main/.repo_info/solve-it.md)
+- [Download the knowledge base as Excel spreadsheet](https://github.com/SOLVE-IT-DF/solve-it/raw/refs/heads/main/.repo_info/solve-it-latest.xlsx)
+- [Propose an addition to the knoweldge base](https://github.com/SOLVE-IT-DF/solve-it/issues/new/choose) - see [CONTRIBUTING.md]((CONTRIBUTING.md)) for guidance
+
 ## Introduction
 The SOLVE-IT knowledge base (Systematic Objective-based Listing of Various Established digital Investigation Techniques) is conceptually inspired by [MITRE ATT&CK](https://attack.mitre.org/matrices/enterprise/) and aims to capture digital forensic techniques that can be used in investigations. It includes details about each technique, examples, potential ways the technique can go wrong (weaknesses), and mitigations to either avoid, detect, or minimize the consequences of a weakness if it does occur.
 
