@@ -115,7 +115,7 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 - 🟢 [T1060 - Enumerate allocated files and folders](md_content/T1060.md)
 - 🟢 [T1061 - Recover non-allocated files](md_content/T1061.md)
     - 🟢 [T1150 - Recover non-allocated files using residual file metadata](md_content/T1150.md)
-    - 🟢 [T1064 - File carving](md_content/T1064.md)
+    - 🟡 [T1064 - File carving](md_content/T1064.md)
 - 🔴 [T1062 - Decryption of encrypted file systems/volumes](md_content/T1062.md)
 - 🟢 [T1063 - Identify file types](md_content/T1063.md)
 <a id="extract-artifacts-stored-by-the-operating-system"></a>
@@ -139,16 +139,16 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 - 🟢 [T1069 - Browser examination](md_content/T1069.md)
     - 🟢 [T1137 - Browser history examination](md_content/T1137.md)
     - 🟢 [T1138 - Browser cache examination](md_content/T1138.md)
-    - 🟢 [T1139 - Browser session examination](md_content/T1139.md)
-    - 🟢 [T1140 - Browser autofill examination](md_content/T1140.md)
-    - 🟢 [T1141 - Browser bookmarks examination](md_content/T1141.md)
-    - 🟢 [T1142 - Browser downloads examination](md_content/T1142.md)
-    - 🟢 [T1143 - Browser configuration examination](md_content/T1143.md)
+    - 🔴 [T1139 - Browser session examination](md_content/T1139.md)
+    - 🔴 [T1140 - Browser autofill examination](md_content/T1140.md)
+    - 🟡 [T1141 - Browser bookmarks examination](md_content/T1141.md)
+    - 🟡 [T1142 - Browser downloads examination](md_content/T1142.md)
+    - 🔴 [T1143 - Browser configuration examination](md_content/T1143.md)
     - 🟢 [T1144 - Browser profile enumeration](md_content/T1144.md)
-    - 🟢 [T1145 - Browser extensions examination](md_content/T1145.md)
-    - 🟢 [T1146 - Browser synchronization feature examination](md_content/T1146.md)
-    - 🟢 [T1147 - Browser cookie examination](md_content/T1147.md)
-    - 🟢 [T1148 - Browser web storage examination](md_content/T1148.md)
+    - 🔴 [T1145 - Browser extensions examination](md_content/T1145.md)
+    - 🔴 [T1146 - Browser synchronization feature examination](md_content/T1146.md)
+    - 🔴 [T1147 - Browser cookie examination](md_content/T1147.md)
+    - 🔴 [T1148 - Browser web storage examination](md_content/T1148.md)
 - 🔴 [T1070 - Email examination](md_content/T1070.md)
 - 🟢 [T1072 - Chat app examination](md_content/T1072.md)
 - 🔴 [T1073 - Calendar app examination](md_content/T1073.md)
@@ -254,4 +254,4 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 
 ---
 
-*Markdown generated: 2025-11-13 14:28:04*
+*Markdown generated: 2025-11-14 15:15:23*
