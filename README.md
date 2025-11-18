@@ -69,7 +69,7 @@ In the Excel and Markdown versions, colors are used to indicate the 'status' of 
 Note, this is controlled via the `global_solveit_config.py` script in the `extension_data` folder, and this behaviour may be modified by other extensions. 
 
 ## Organisation of the techniques
-The file `solve-it.json` is the default categorisation of the techniques, but other examples are provided in `carrier.json` and `dfrws.json` (but these other examples are not maintained since the original release). 
+The file `solve-it.json` is the default categorisation of the techniques, but other categorizations are possible with custom JSON files. The examples repository discusses how this can be done and provides examples for `carrier.json` and `dfrws.json`. See [here](https://github.com/SOLVE-IT-DF/solve-it-examples/tree/main/reorganization_of_techniques) for more information. 
 
 
 
