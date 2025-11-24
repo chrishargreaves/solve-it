@@ -1,6 +1,6 @@
 {
-  "id": "W1149",
-  "name": "Offset applied to timestamp is incorrect due to variations in clock offset over the history of data source",
+  "id": "W1265",
+  "name": "Offset applied to timestamp is incorrect due to variations in time zone over the history of data source",
   "INCOMP": "",
   "INAC-EX": "x",
   "INAC-ALT": "",
@@ -9,6 +9,6 @@
   "MISINT": "",
   "references": [],
   "mitigations": [
-    "M1225"
+    "M1224"
   ]
 }
