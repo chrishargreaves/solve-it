@@ -4,7 +4,7 @@
     "description": "The extraction and normalisation of timestamps from a data source into a set of timeline entries",
     "synonyms": ["timelining"],
     "details": "",
-    "subtechniques": [],
+    "subtechniques": ["T1153"],
     "examples": ["plaso"],
     "weaknesses": ["W1144", "W1145", "W1146", "W1147", "W1148", "W1151"],
     "CASE_output_classes" : [],

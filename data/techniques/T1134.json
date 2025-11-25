@@ -1,6 +1,6 @@
 {
   "id": "T1134",
-  "name": "Estimate system clock offset at a point in time",
+  "name": "Use time anchors to estimate clock offset",
   "description": "Correlate timestamps from the system clock and an external trusted time source (Time Anchoring)",
   "synonyms": [
     "Timestamp correlation",
@@ -17,6 +17,7 @@
   "references": [
     "C. Vanini, C. Hargreaves, H. van Beek, F. Breitinger, 2024, Was the clock correct? Exploring timestamp interpretation through time anchors for digital forensic event reconstruction, Forensic Science International: Digital Investigation, 10.1016/j.fsidi.2024.301759"
   ],
+  "CASE_output_classes": [],
   "weaknesses": [
     "W1260",
     "W1261",
