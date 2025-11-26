@@ -1,12 +1,12 @@
 {
     "id": "W1148",
-    "name": "Incorrect time offset applied to a timeline entry",
+    "name": "Timestamp used is an inaccurate representation of the real world time due to inaccurate system clock",
     "INCOMP": "",
     "INAC-EX": "x",
     "INAC-AS": "",
-    "INAC-ALT": "x",
+    "INAC-ALT": "",
     "INAC-COR": "",
     "MISINT": "",
-    "mitigations": [],
-    "references": ["Céline Vanini, Christopher J. Hargreaves, Harm van Beek, Frank Breitinger, 2024. Was the clock correct? Exploring timestamp interpretation through time anchors for digital forensic event reconstruction. Digital Investigation, 49."]
+    "mitigations": ["M1101","M1225","M1227","M1228"],
+    "references": []
 }
