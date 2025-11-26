@@ -6,8 +6,9 @@
   "subtechniques": [],
   "CASE_output_classes": [],
   "weaknesses": [
-    "W1149",
     "W1264",
-    "W1265"
+    "W1265",
+	"W1267",
+	"W1268"
   ]
 }

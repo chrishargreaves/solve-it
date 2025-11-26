@@ -1,14 +1,12 @@
 {
-  "id": "W1149",
-  "name": "Offset applied to timestamp is incorrect due to variations in clock offset over the history of data source",
-  "INCOMP": "",
-  "INAC-EX": "x",
-  "INAC-ALT": "",
-  "INAC-AS": "",
-  "INAC-COR": "",
-  "MISINT": "",
-  "references": [],
-  "mitigations": [
-    "M1225"
-  ]
+    "id": "W1149",
+    "name": "Failure to determine clock accuracy at time of inferred event",
+    "INCOMP": "",
+    "INAC-EX": "x",
+    "INAC-AS": "",
+    "INAC-ALT": "",
+    "INAC-COR": "",
+    "MISINT": "x",
+    "mitigations": ["M1103","M1227","M1228"],
+    "references": ["Céline Vanini, Christopher J. Hargreaves, Harm van Beek, Frank Breitinger, 2024. Was the clock correct? Exploring timestamp interpretation through time anchors for digital forensic event reconstruction. Digital Investigation, 49."]
 }
