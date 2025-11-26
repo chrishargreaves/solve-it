@@ -132,6 +132,7 @@ T1130	Search for indicators of encrypted data
 T1131	Search for indicators of trail obfuscation	
 T1132	Search for indicators of artifact wiping	
 T1133	AI companion app examination	
+T1134	Use time anchors to estimate clock offset	
 T1137	Browser history examination	
 T1138	Browser cache examination	
 T1139	Browser session examination	
@@ -147,3 +148,4 @@ T1148	Browser web storage examination
 T1149	File versioning feature examination	
 T1150	Recover non-allocated files using residual file metadata	
 T1151	Keyword search (over extracted artifacts)	
+T1153	Apply offset to a timestamp	

@@ -166,7 +166,8 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 *Process data to extract artifacts or stored content of specific types.*
 
 - 🔴 [T1021 - Configuration file examination](md_content/T1021.md)
-- 🟡 [T1052 - Timeline generation](md_content/T1052.md)
+- 🟢 [T1052 - Timeline generation](md_content/T1052.md)
+    - 🟢 [T1153 - Apply offset to a timestamp](md_content/T1153.md)
 - 🔴 [T1053 - Entity extraction](md_content/T1053.md)
 - 🔴 [T1056 - Entity connection enumeration](md_content/T1056.md)
 - 🟢 [T1071 - Database examination](md_content/T1071.md)
@@ -189,7 +190,8 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
     - 🟢 [T1151 - Keyword search (over extracted artifacts)](md_content/T1151.md)
 - 🟡 [T1050 - Hash matching (locate)](md_content/T1050.md)
 - 🔴 [T1051 - Fuzzy hash matching](md_content/T1051.md)
-- 🔴 [T1086 - Timeline analysis](md_content/T1086.md)
+- 🟢 [T1086 - Timeline analysis](md_content/T1086.md)
+    - 🟢 [T1134 - Use time anchors to estimate clock offset](md_content/T1134.md)
 - 🟢 [T1118 - Locate relevant files by path](md_content/T1118.md)
 <a id="review-content-for-relevance"></a>
 ### Review content for relevance
@@ -254,4 +256,4 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 
 ---
 
-*Markdown generated: 2025-11-18 11:15:55*
+*Markdown generated: 2025-11-26 19:28:07*

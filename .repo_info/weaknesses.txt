@@ -146,7 +146,7 @@ W1144	Failure to identify timestamps in a data source
 W1145	Failure to extract timestamps from a data source
 W1146	Failure to consider non-timestamp based timing information
 W1147	Failure to normalise timestamps correctly during timeline generation
-W1148	Incorrect time offset applied to a timeline entry
+W1148	Timestamp used is an inaccurate representation of the real world time due to inaccurate system clock
 W1149	Failure to determine clock accuracy at time of inferred event
 W1150	Misinterpreting events from automated processes as user generated ones
 W1151	Incorrectly decoding a timestamp from a data source
@@ -251,3 +251,13 @@ W1255	Recovered file content is incorrect due to incorrect parsing of file size 
 W1256	Incorrect attribution of metadata to file content that was the result of 'file tunnelling'
 W1257	Missing content that is relevant to a keyword search but it has not been extracted as 'artifacts'
 W1259	Image format parsing fails to identify or assemble split forensic images
+W1260	Failure to derive clock offset due to inability to locate a suitable time anchor
+W1261	Estimated clock offset is incorrect resulting from an inaccurate external time source when performing Time Anchoring
+W1262	Estimated clock offset is incorrect resulting from correlating two timestamps that were not written at the same time
+W1263	Estimated clock offset is incorrect resulting from misinterpretation of locally stored timestamps when performing Time Anchoring
+W1264	Offset applied to timestamp is incorrect due to failure to distinguish UTC stored timestamp from local timestamp
+W1265	Offset applied to timestamp is incorrect due to variations in time zone over the history of data source
+W1266	Timestamp used is an inaccurate representation of the real world time due to timezone and/or daylight savings
+W1267	Offset applied to timestamp is incorrect due to variations in clock offset over the history of data source
+W1268	Offset applied to timestamp is incorrect due to incorrect daylight savings configuration used
+W1269	Failure to apply time offset to a timeline entry
