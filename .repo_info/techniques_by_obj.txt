@@ -100,6 +100,7 @@ Extract artifacts, or content of specific types	T1076	Log file examination
 Extract artifacts, or content of specific types	T1100	EXIF data extraction
 Extract artifacts, or content of specific types	T1099	File repair with grafting
 Extract artifacts, or content of specific types	T1052	Timeline generation
+Extract artifacts, or content of specific types	T1153	Apply offset to a timestamp (s)
 Extract artifacts, or content of specific types	T1053	Entity extraction
 Extract artifacts, or content of specific types	T1056	Entity connection enumeration
 Extract artifacts, or content of specific types	T1120	Automated artifact extraction
@@ -116,6 +117,7 @@ Locate potentially relevant content	T1123	Keyword search (case-specific wordlist
 Locate potentially relevant content	T1151	Keyword search (over extracted artifacts) (s)
 Locate potentially relevant content	T1118	Locate relevant files by path
 Locate potentially relevant content	T1086	Timeline analysis
+Locate potentially relevant content	T1134	Use time anchors to estimate clock offset (s)
 Review content for relevance	T1054	Manual content review for relevant material
 Review content for relevance	T1055	File system content inspection
 Review content for relevance	T1079	Audio content analysis

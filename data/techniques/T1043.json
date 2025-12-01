@@ -6,7 +6,7 @@
     "details": "",
     "subtechniques": [],
     "examples": [],
-    "weaknesses": ["W1121", "W1122", "W1123"],
+    "weaknesses": ["W1121", "W1122", "W1123", "W1259"],
     "CASE_output_classes" : [],
     "references": ["todo"]
 }

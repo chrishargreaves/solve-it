@@ -8,6 +8,7 @@ import datetime
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from solve_it_library import KnowledgeBase, SOLVEITDataError
 import solve_it_library.solve_it_x as solve_it_x
+import extension_data.global_solveit_config as global_solveit_config
 
 
 def main():
@@ -80,6 +81,7 @@ def main():
     create_main_markdown(kb, outpath)
     
     write_all_technique_files(kb, outpath, extension_config)
+    write_all_weakness_files(kb, outpath, extension_config)
 
     print(f"Markdown file created at: {outpath}")
 
@@ -146,7 +148,7 @@ def create_main_markdown(kb, outpath):
 
         mdfile.write(f"# Objectives and Techniques\n" )
 
-        # Write each tactic and its techniques
+        # Write each objective and its techniques
         for objective in kb.list_objectives():
             mdfile.write(f'<a id="{objective_name_to_friendly_id(objective.get('name'))}"></a>\n')
             mdfile.write(f"### {objective.get('name')}\n" )
@@ -157,13 +159,17 @@ def create_main_markdown(kb, outpath):
                 if technique is None:
                     logging.error(f"Technique {each_technique_id} not found in knowledge base, exiting")
                     sys.exit(-1)
-                mdfile.write(f"- [{each_technique_id} - {technique.get('name')}](md_content/{each_technique_id}.md)\n" )
+
+                solveitx_technique_content_suffix = solve_it_x.add_markdown_to_technique_preview_suffix(each_technique_id)
+
+                mdfile.write(f"- {global_solveit_config.get_technique_prefix(kb, each_technique_id)}[{each_technique_id} - {technique.get('name')}](md_content/{each_technique_id}.md){global_solveit_config.get_technique_suffix(kb, each_technique_id)}{solveitx_technique_content_suffix}\n" )
                 for each_sub_technique_id in technique.get('subtechniques'):
                     sub_t = kb.get_technique(each_sub_technique_id)
                     if sub_t is None:
                         logging.error(f'Subtechnique {each_sub_technique_id} not found (referred to from {each_technique_id})')
                         sys.exit(-1)
-                    mdfile.write(f"    - [{each_sub_technique_id} - {sub_t.get('name')}](md_content/{each_sub_technique_id}.md)\n" )
+
+                    mdfile.write(f"    - {global_solveit_config.get_technique_prefix(kb, each_sub_technique_id)}[{each_sub_technique_id} - {sub_t.get('name')}](md_content/{each_sub_technique_id}.md){global_solveit_config.get_technique_suffix(kb, each_technique_id)}\n" )
 
         # Write footer with generation timestamp
         generation_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -209,6 +215,7 @@ def write_all_technique_files(kb, outpath, extension_config):
                     if sub_t is None:
                         logging.error(f'Subtechnique {each_sub_technique_id} not found (referred to from {each_technique_id})')
                         sys.exit(-1)
+
                     technique_md_file.write(f"- [{each_sub_technique_id} - {sub_t.get('name')}]({each_sub_technique_id}.md)\n")
                 technique_md_file.write(f"\n\n")
 
@@ -234,7 +241,10 @@ def write_all_technique_files(kb, outpath, extension_config):
 
                     categories_str = get_weakness_categories(weakness)
 
-                    technique_md_file.write(f"- {weakness_id}: {weakness.get('name')} _({categories_str})_\n")
+                    solveitx_weakness_content_prefix = solve_it_x.add_markdown_to_weakness_preview_prefix(weakness_id)
+                    solveitx_weakness_content_suffix = solve_it_x.add_markdown_to_weakness_preview_suffix(weakness_id)                    
+
+                    technique_md_file.write(f"- {solveitx_weakness_content_prefix}[{weakness_id}]({weakness_id}.md): {weakness.get('name')} _({categories_str})_{solveitx_weakness_content_suffix}\n")
                     
                     # This adds all the mitigations
                     for each_mit in weakness.get('mitigations'):
@@ -261,7 +271,49 @@ def write_all_technique_files(kb, outpath, extension_config):
             technique_md_file.write(f"\n\n---\n\n")
             technique_md_file.write(f"*Markdown generated: {generation_time}*\n")
       
-    
+
+def write_all_weakness_files(kb, outpath, extension_config):
+    generation_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    for each_weakness_id in kb.list_weaknesses():
+        weakness = kb.get_weakness(each_weakness_id)
+        if weakness is None:
+            logging.error(f"Weakness {each_weakness_id} not found in knowledge base, exiting")
+            sys.exit(-1)
+        weakness_filepath = os.path.join(os.path.dirname(outpath), 'md_content', each_weakness_id + '.md')
+        with open(weakness_filepath, 'w', encoding='utf-8') as weakness_md_file:
+            weakness_md_file.write(f"[< back to main](../solve-it.md)\n")
+            weakness_md_file.write(f"# {each_weakness_id}\n\n")
+            weakness_md_file.write(f"**Name:** {weakness.get('name')}\n\n")            
+            weakness_md_file.write(f"**Weakness classes:** {get_weakness_categories(weakness)}\n\n")
+            weakness_md_file.write(f"**Details:** {weakness.get('details')}\n\n")
+
+            # This adds all the mitigations
+            weakness_md_file.write(f"**Mitigations:**\n\n")
+            for each_mit in weakness.get('mitigations'):
+                mitigation = kb.get_mitigation(each_mit)
+                if mitigation is None:
+                    logging.error(f'Mitigation {each_mit} not found (referred to from weakness {weakness_id})')
+                    sys.exit(-1)
+                if mitigation.get('technique') is None:
+                    weakness_md_file.write(f"- {each_mit}: {mitigation.get('name')} \n")
+                else:
+                    weakness_md_file.write(f"- {each_mit}: {mitigation.get('name')} ([{mitigation.get('technique')}]({mitigation.get('technique') +'.md'}))\n")
+            weakness_md_file.write(f"\n\n") 
+
+            # This adds all the references
+            weakness_md_file.write(f"**References:**\n\n")
+            for each_reference in weakness.get('references'):
+                weakness_md_file.write(f"- {each_reference}\n")
+            weakness_md_file.write(f"\n\n")
+
+            # Add content from SOLVE-IT Extensions
+            weakness_md_file.write(f"{solve_it_x.add_markdown_to_weakness(each_weakness_id)}")
+
+            # Write footer with generation timestamp
+            weakness_md_file.write(f"\n\n---\n\n")
+            weakness_md_file.write(f"*Markdown generated: {generation_time}*\n")
+
 
 if __name__ == "__main__":
     main()

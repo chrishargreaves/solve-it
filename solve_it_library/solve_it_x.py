@@ -71,6 +71,9 @@ def load_extension_module(extension_folder, project_root):
         logging.error(f'Extension code not found at {extension_code_path} ({os.path.abspath(extension_code_path)})')
         sys.exit(-1)
 
+# ------------------
+# Markdown functions
+# ------------------
 
 def add_markdown_to_main_page():
     logging.debug('Called solve-it-x main markdown code')    
@@ -117,13 +120,95 @@ def add_markdown_to_technique(t_id):
     return total_markdown_to_add
 
 
+def add_markdown_to_technique_preview_suffix(t_id):
+    logging.debug('Called solve-it-x technique suffix code')    
+
+    project_root = Path(__file__).parent.parent
+    extension_config = get_extension_config(project_root)
+
+    if extension_config is None:
+        return ""
+
+    total_markdown_to_add = ""
+    for each_extension in extension_config.get('extensions'):
+        extension_folder = extension_config.get('extensions').get(each_extension).get('folder_path')
+        extension_module = load_extension_module(extension_folder, project_root)
+        if hasattr(extension_module, 'get_markdown_for_technique_suffix'):
+            total_markdown_to_add += extension_module.get_markdown_for_technique_suffix(t_id)
+
+    return total_markdown_to_add
+
 
 def add_markdown_to_weakness(w_id):
-    return ""
+    logging.debug('Called solve-it-x weakness markdown code')    
 
+    project_root = Path(__file__).parent.parent
+    extension_config = get_extension_config(project_root)
+
+    if extension_config is None:
+        return ""
+
+    total_markdown_to_add = ""
+
+    for each_extension in extension_config.get('extensions'):
+        extension_folder = extension_config.get('extensions').get(each_extension).get('folder_path')
+
+        extension_module = load_extension_module(extension_folder, project_root)
+
+        if hasattr(extension_module, 'get_markdown_for_weakness'):
+            total_markdown_to_add += extension_module.get_markdown_for_weakness(w_id)
+        
+    return total_markdown_to_add
+
+
+def add_markdown_to_weakness_preview_prefix(w_id):
+    logging.debug('Called solve-it-x weakness prefix code')    
+
+    project_root = Path(__file__).parent.parent
+    extension_config = get_extension_config(project_root)
+
+    if extension_config is None:
+        return ""
+
+    total_markdown_to_add = ""
+
+    for each_extension in extension_config.get('extensions'):
+        extension_folder = extension_config.get('extensions').get(each_extension).get('folder_path')
+
+        extension_module = load_extension_module(extension_folder, project_root)
+
+        if hasattr(extension_module, 'get_markdown_for_weakness_prefix'):
+            total_markdown_to_add += extension_module.get_markdown_for_weakness_prefix(w_id)
+
+    return total_markdown_to_add
+
+def add_markdown_to_weakness_preview_suffix(w_id):
+    logging.debug('Called solve-it-x weakness suffix code')    
+
+    project_root = Path(__file__).parent.parent
+    extension_config = get_extension_config(project_root)
+
+    if extension_config is None:
+        return ""
+
+    total_markdown_to_add = ""
+
+    for each_extension in extension_config.get('extensions'):
+        extension_folder = extension_config.get('extensions').get(each_extension).get('folder_path')
+
+        extension_module = load_extension_module(extension_folder, project_root)
+
+        if hasattr(extension_module, 'get_markdown_for_weakness_suffix'):
+            total_markdown_to_add += extension_module.get_markdown_for_weakness_suffix(w_id)
+
+    return total_markdown_to_add
 
 def add_markdown_to_mitigation(m_id):
     return ""
+
+# --------------
+# HTML functions
+# --------------
 
 def add_html_to_main_page():
     return ""
@@ -137,6 +222,9 @@ def add_html_to_weakness(w_id):
 def add_html_to_mitigation(m_id):
     return ""
 
+# ---------------
+# Excel functions
+# ---------------
 
 def edit_excel_technique(t_id, workbook, worksheet, start_row):
     logging.debug('Called solve-it-x technique Excel code')    

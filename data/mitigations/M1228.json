@@ -1,0 +1,6 @@
+{
+  "id": "M1228",
+  "name": "Record system clock offset",
+  "technique": "T1111",
+  "references": []
+}
