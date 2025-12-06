@@ -99,8 +99,9 @@ M1097	Attempt to obtain password from the suspect
 M1098	Optimise the brute force search space
 M1099	Use a dictionary attack instead (T1035)
 M1100	Apply additional resources to brute force attack
+M1101	Apply time offset to timestamp (T1153)
 M1102	Apply techniques to read remapped sectors
-M1103	Use 'Time Anchors' to assess clock accuracy at time of inferred event
+M1103	Check that analysis of timestamp accuracy on which event reconstruction is based has been performed
 M1104	Testing of report generation functionality that all intended bookmarks are included
 M1105	Manual verification that all intended bookmarks are included in the generated report.
 M1106	Testing that generated reports correctly represent/render all expected file types
@@ -203,3 +204,18 @@ M1212	Test the parsing of split forensic images with the maximum number of segme
 M1213	Test the parsing of split forensic images with missing segments
 M1214	Ensure forensic tool UI clearly warns that there are problems while parsing a split forensic image file
 M1215	Test the parsing of split forensic images with a corrupt segment
+M1216	Check that the assumption is valid that the specific local/external timestamp pair should be correlated
+M1217	Consider multiple time anchors and check if timestamps from multiple external time sources agree
+M1218	Ensure that tools and processes take into account all current knowledge on sources of local/external timestamp pairs (time anchors)
+M1219	Manual verification of timestamp decoding within a time anchor
+M1220	Periodically keep records of time offsets of significant external servers (T1110)
+M1221	Testing of timestamp decoding within a time anchor
+M1222	Testing to ensure that tooling is able to extract local/external timestamp pairs (time anchors)
+M1223	Apply time zone based offsets only to UTC stored timestamps
+M1224	Check for location artifacts to infer the time zone at a specific moment
+M1225	Estimate clock offset at a specific point in time using time anchoring (T1134)
+M1226	Testing to determine whether a timestamp is in UTC or local time
+M1227	Search for indicators of clock tampering (T1129)
+M1228	Record system clock offset (T1111)
+M1229	Determine last timezone used on system
+M1230	Ensure that daylight savings offsets that are applied to timestamps are correct
