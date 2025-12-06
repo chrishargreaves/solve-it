@@ -232,8 +232,11 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 *Use available digital evidence to formulate and test hypotheses about events.*
 
 - 🔴 [T1087 - Location-based event reconstruction](md_content/T1087.md)
-- 🔴 [T1088 - Connection-based event reconstruction](md_content/T1088.md)
+- 🔴 [T1088 - Relational-based event reconstruction](md_content/T1088.md)
 - 🟢 [T1117 - Time-based event reconstruction](md_content/T1117.md)
+- 🔴 [T1154 - Identity-based event reconstruction](md_content/T1154.md)
+- 🔴 [T1155 - Operation-based event reconstruction](md_content/T1155.md)
+- 🔴 [T1156 - Functional-based event reconstruction](md_content/T1156.md)
 <a id="conduct-research"></a>
 ### Conduct research
 *Conduct research to gain additional knowledge to support the acquisition, extraction, or interpretation of digital evidence.*
@@ -256,4 +259,4 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 
 ---
 
-*Markdown generated: 2025-12-06 20:49:33*
+*Markdown generated: 2025-12-06 20:51:18*
