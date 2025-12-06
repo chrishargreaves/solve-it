@@ -46,7 +46,7 @@ Gain access	T1037	Obtain password from suspect
 Gain access	T1040	Use mobile device exploit
 Read data from digital evidence storage formats	T1045	Decode standard archive format
 Read data from digital evidence storage formats	T1042	Disk image hash verification
-Read data from digital evidence storage formats	T1043	Forensic image format decoding
+Read data from digital evidence storage formats	T1043	Decode forensic image format
 Read data from digital evidence storage formats	T1044	Mobile backup decoding
 Read data from digital evidence storage formats	T1102	Decode data from image from unmanaged NAND
 Reduce data under consideration	T1047	Hash matching (reduce)
