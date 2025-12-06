@@ -41,7 +41,7 @@ T1039	App downgrade
 T1040	Use mobile device exploit	
 T1041	Pin2Pwn	
 T1042	Disk image hash verification	
-T1043	Forensic image format decoding	
+T1043	Decode forensic image format	
 T1044	Mobile backup decoding	
 T1045	Decode standard archive format	
 T1046	Privileged material protection	
@@ -86,7 +86,7 @@ T1084	Extraction of user accounts
 T1085	Identify conflation	
 T1086	Timeline analysis	
 T1087	Location-based event reconstruction	
-T1088	Connection-based event reconstruction	
+T1088	Relational-based event reconstruction	
 T1089	Source code review	
 T1090	Experimentation	
 T1091	Bookmark artifacts	
@@ -149,3 +149,6 @@ T1149	File versioning feature examination
 T1150	Recover non-allocated files using residual file metadata	
 T1151	Keyword search (over extracted artifacts)	
 T1153	Apply offset to a timestamp	
+T1154	Identity-based event reconstruction	
+T1155	Operation-based event reconstruction	
+T1156	Functional-based event reconstruction	

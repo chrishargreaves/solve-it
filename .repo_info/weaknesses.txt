@@ -64,7 +64,7 @@ W1062	The grade or specific tag given to item is incorrect
 W1063	Incorrectly parsing the partitions table(s)
 W1064	Making incorrect assumptions about sector size e.g. 512 rather than 4096
 W1065	Failing to correctly parse start sector pointers from partition tables
-W1066	Missing deleted but recoverable partitions 
+W1066	Missing deleted but recoverable partitions from unpartitioned space
 W1067	Failure to check the integrity of partition table (where possible e.g. GPT)
 W1068	Failing to identify the existence of a live file
 W1069	Failing to identify the existence of a live directory
@@ -147,7 +147,7 @@ W1145	Failure to extract timestamps from a data source
 W1146	Failure to consider non-timestamp based timing information
 W1147	Failure to normalise timestamps correctly during timeline generation
 W1148	Timestamp used is an inaccurate representation of the real world time due to inaccurate system clock
-W1149	Failure to determine clock accuracy at time of inferred event
+W1149	Failure to consider timestamp inaccuracy at time of inferred event
 W1150	Misinterpreting events from automated processes as user generated ones
 W1151	Incorrectly decoding a timestamp from a data source
 W1152	Generated report does not include all bookmarks

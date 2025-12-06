@@ -46,7 +46,7 @@ Gain access	T1037	Obtain password from suspect
 Gain access	T1040	Use mobile device exploit
 Read data from digital evidence storage formats	T1045	Decode standard archive format
 Read data from digital evidence storage formats	T1042	Disk image hash verification
-Read data from digital evidence storage formats	T1043	Forensic image format decoding
+Read data from digital evidence storage formats	T1043	Decode forensic image format
 Read data from digital evidence storage formats	T1044	Mobile backup decoding
 Read data from digital evidence storage formats	T1102	Decode data from image from unmanaged NAND
 Reduce data under consideration	T1047	Hash matching (reduce)
@@ -137,8 +137,11 @@ Establish identities	T1085	Identify conflation
 Create visualizations	T1103	Virtualise suspect system for previewing
 Create visualizations	T1115	Visualisation of geolocation information
 Reconstruct events	T1087	Location-based event reconstruction
-Reconstruct events	T1088	Connection-based event reconstruction
+Reconstruct events	T1088	Relational-based event reconstruction
 Reconstruct events	T1117	Time-based event reconstruction
+Reconstruct events	T1154	Identity-based event reconstruction
+Reconstruct events	T1155	Operation-based event reconstruction
+Reconstruct events	T1156	Functional-based event reconstruction
 Conduct research	T1090	Experimentation
 Conduct research	T1095	Instrumentation
 Conduct research	T1089	Source code review
