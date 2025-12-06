@@ -147,7 +147,7 @@ W1145	Failure to extract timestamps from a data source	x
 W1146	Failure to consider non-timestamp based timing information	x					
 W1147	Failure to normalise timestamps correctly during timeline generation		x		x		
 W1148	Timestamp used is an inaccurate representation of the real world time due to inaccurate system clock		x				
-W1149	Failure to determine clock accuracy at time of inferred event		x				x
+W1149	Failure to consider timestamp inaccuracy at time of inferred event	x	x	x			x
 W1150	Misinterpreting events from automated processes as user generated ones		x				x
 W1151	Incorrectly decoding a timestamp from a data source				x		
 W1152	Generated report does not include all bookmarks	x					
