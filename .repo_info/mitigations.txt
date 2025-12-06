@@ -198,6 +198,10 @@ M1200	Ensure that inconsistencies between allocated data size and data written s
 M1203	Use indexed keyword search over broader content of the data source (T1124)
 M1204	Use live keyword search over broader content of the data source (T1125)
 M1205	Use wordlist generator with case data
+M1206	Ensure that tools used clearly separate fact from interpretation
+M1207	Ensure training is in place for tool operators to separate fact from interpretation within the tool used
+M1208	Review critical findings from tools to ensure they are facts, or if they are an automated interpretation, ensure that any uncertainty is considered
+M1209	Ensure that tools used present the uncertainty associated with automated interpretation of data
 M1210	Use a forensic image format with internal integrity and continuity metadata
 M1211	Test the parsing of split forensic images
 M1212	Test the parsing of split forensic images with the maximum number of segments possible

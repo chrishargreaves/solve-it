@@ -250,6 +250,7 @@ W1254	Recovered (non-allocated) file content is incorrect due to an incorrect as
 W1255	Recovered file content is incorrect due to incorrect parsing of file size information that records allocated but unwritten sectors (e.g. Valid Data Length (VDL)
 W1256	Incorrect attribution of metadata to file content that was the result of 'file tunnelling'
 W1257	Missing content that is relevant to a keyword search but it has not been extracted as 'artifacts'
+W1258	Failure to present uncertainty associated with automated interpretation of data into artifacts
 W1259	Image format parsing fails to identify or assemble split forensic images
 W1260	Failure to derive clock offset due to inability to locate a suitable time anchor
 W1261	Estimated clock offset is incorrect resulting from an inaccurate external time source when performing Time Anchoring
