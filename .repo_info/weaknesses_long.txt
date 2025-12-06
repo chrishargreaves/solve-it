@@ -64,7 +64,7 @@ W1062	The grade or specific tag given to item is incorrect			X
 W1063	Incorrectly parsing the partitions table(s)	X	X				
 W1064	Making incorrect assumptions about sector size e.g. 512 rather than 4096	X					
 W1065	Failing to correctly parse start sector pointers from partition tables	X	X				
-W1066	Missing deleted but recoverable partitions 	X					
+W1066	Missing deleted but recoverable partitions from unpartitioned space	X					
 W1067	Failure to check the integrity of partition table (where possible e.g. GPT)					X	
 W1068	Failing to identify the existence of a live file	X					
 W1069	Failing to identify the existence of a live directory	X					
