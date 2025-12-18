@@ -7,6 +7,6 @@
     "subtechniques": [],
     "examples":  [],
     "weaknesses": ["W1199", "W1192"],
-    "CASE_output_classes" : [],
+    "CASE_output_classes" : ["https://ontology.solveit-df.org/KeywordSearchResult"],
     "references": []
 }

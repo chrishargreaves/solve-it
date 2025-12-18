@@ -10,7 +10,8 @@
     ],
     "weaknesses": ["W1257"],
     "CASE_output_classes": [
-    ],
+            "https://ontology.solveit-df.org/KeywordSearchResult"
+                ],
     "references": [
         "McQuaid, J. (2017) ‘Using Keywords with Magnet AXIOM’, Magnet Forensics [Blog], https://www.magnetforensics.com/blog/using-keywords-with-magnet-axiom/"
     ]

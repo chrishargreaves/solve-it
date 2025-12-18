@@ -7,6 +7,7 @@
     "subtechniques": [],
     "examples": [],
     "weaknesses": ["W1173"],
-    "CASE_output_classes" : ["observable:systemTime"],
+    "CASE_output_classes" : ["https://ontology.unifiedcyberontology.org/uco/observable/systemTime",
+                             "https://ontology.solveit-df.org/observable/ClockOffset"],
     "references": []
 }

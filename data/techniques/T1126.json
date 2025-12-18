@@ -7,7 +7,7 @@
     "subtechniques": [],
     "examples":  [],
     "weaknesses": ["W1193", "W1194", "W1195"],
-    "CASE_output_classes" : [],
+    "CASE_output_classes" : ["https://ontology.solveit-df.org/KeywordSearchResult"],
     "references": ["NIST, 2025. Computer forensics tools & techniques catalog: string search, https://toolcatalog.nist.gov/taxonomy/index.php?ff_id=31",
                    "X-Ways (2025), X-Ways Manual: Simultaneous Search (section 5.10), https://www.x-ways.net/winhex/manual.pdf"]
 }

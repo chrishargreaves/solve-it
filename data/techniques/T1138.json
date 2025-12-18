@@ -8,7 +8,9 @@
     "subtechniques": [],
     "examples": [],
     "weaknesses": ["W1252"],
-    "CASE_output_classes" : ["observable:File",  
-                             "observable:SQLiteBlob"],
+    "CASE_output_classes" : ["https://ontology.unifiedcyberontology.org/uco/observable/File",  
+                             "https://ontology.unifiedcyberontology.org/uco/observable/SQLiteBlob",
+                             "https://ontology.unifiedcyberontology.org/uco/observable/httpRequestHeader",
+                             "https://ontology.solveit-df.org/observable/httpResponseHeader"],
     "references": []
 }

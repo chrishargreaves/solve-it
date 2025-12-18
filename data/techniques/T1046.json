@@ -7,6 +7,7 @@
     "subtechniques": [],
     "examples": [],
     "weaknesses": [],
-    "CASE_output_classes" : [],
+    "CASE_output_classes" : ["https://ontology.solveit-df.org/RedactedFileSet",
+                             "https://ontology.solveit-df.org/RedactedArtifactSet"],
     "references": ["todo"]
 }
