@@ -7,6 +7,10 @@
     "subtechniques": [],
     "examples": [],
     "weaknesses": [],
-    "CASE_output_classes" : ["https://ontology.solveit-df.org/RedactedArtifactSet"],
-    "references": ["Dickinson (2020) ‘Privacy by design – 10 ways MSAB can help you meet the challenges.’ MSAB Blog. Available at: https://www.msab.com/blog/privacy-by-design-10-ways-msab-can-help-you-meet-the-challenges/"]
+    "CASE_output_classes": [
+        "https://ontology.solveit-df.org/solveit/observable/RedactedArtifactSet"
+    ],
+    "references": [
+        "Dickinson (2020) \u2018Privacy by design \u2013 10 ways MSAB can help you meet the challenges.\u2019 MSAB Blog. Available at: https://www.msab.com/blog/privacy-by-design-10-ways-msab-can-help-you-meet-the-challenges/"
+    ]
 }
