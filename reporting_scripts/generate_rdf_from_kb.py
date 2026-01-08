@@ -170,6 +170,10 @@ def add_weaknesses_to_graph(g, kb):
         g.add((weak_uri, SOLVEIT_CORE.weaknessID, Literal(weak_id)))
         g.add((weak_uri, SOLVEIT_CORE.weaknessName, Literal(weak['name'])))
 
+        # Add description if present
+        if weak.get('description'):
+            g.add((weak_uri, SOLVEIT_CORE.weaknessDescription, Literal(weak['description'])))
+
         # Add ALL error category flags explicitly (true or false)
         # This follows the pattern in the ontology examples
         g.add((weak_uri, SOLVEIT_CORE.mayResultInINCOMP,
@@ -220,6 +224,15 @@ def add_mitigations_to_graph(g, kb):
         g.add((mit_uri, SOLVEIT_CORE.mitigationID, Literal(mit_id)))
         g.add((mit_uri, SOLVEIT_CORE.mitigationName, Literal(mit['name'])))
 
+        # Add description if present
+        if mit.get('description'):
+            g.add((mit_uri, SOLVEIT_CORE.mitigationDescription, Literal(mit['description'])))
+
+        # Add technique link if present
+        if mit.get('technique'):
+            technique_uri = SOLVEIT_DATA[f"technique{mit['technique']}"]
+            g.add((mit_uri, SOLVEIT_CORE.linksToTechnique, technique_uri))
+
         # Add references
         for reference in mit.get('references', []):
             g.add((mit_uri, SOLVEIT_CORE.hasReference, Literal(reference)))
@@ -237,7 +250,7 @@ def add_objectives_to_graph(g, kb):
         obj_uri = SOLVEIT_DATA[f"objective{idx:02d}"]
 
         # Add type
-        g.add((obj_uri, RDF.type, SOLVEIT_CORE.InvestigationObjective))
+        g.add((obj_uri, RDF.type, SOLVEIT_CORE.Objective))
 
         # Add label
         g.add((obj_uri, RDFS.label, Literal(obj_name, lang="en")))
