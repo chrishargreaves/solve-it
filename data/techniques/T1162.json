@@ -4,7 +4,7 @@
     "description": "",
     "synonyms": ["ISCP", "In-circuit serial Programming"],
     "details": "",
-    "subtechniques": [],
+    "subtechniques": ["T1027"],
     "examples": [],
     "weaknesses": [],
     "CASE_output_classes": [

@@ -18,7 +18,7 @@
     "description": "Collect data from the identified evidence sources.",
     "techniques": ["T1112", "T1113",
                     "T1111",
-                    "T1028", "T1029", "T1030", "T1027",
+                    "T1028", "T1029", "T1030",
                     "T1002",
                     "T1003", "T1114", "T1016",
                     "T1020", "T1022",
@@ -30,7 +30,8 @@
                     "T1025", "T1026",
                     "T1157",
                     "T1159",
-                    "T1160"]
+                    "T1160", 
+                    "T1162"]
     },
 
     {"name":"Gain access",
