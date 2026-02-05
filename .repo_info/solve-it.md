@@ -87,7 +87,7 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 - 🟢 [T1035 - Dictionary attack](md_content/T1035.md)
 - 🔴 [T1036 - Smudge attack](md_content/T1036.md)
 - 🔴 [T1037 - Obtain password from suspect](md_content/T1037.md)
-- 🔴 [T1038 - Rainbow tables](md_content/T1038.md)
+- 🔴 [T1038 - Rainbow table-based password attack](md_content/T1038.md)
 - 🔴 [T1039 - App downgrade](md_content/T1039.md)
 - 🟡 [T1040 - Use mobile device exploit](md_content/T1040.md)
 - 🔴 [T1041 - Pin2Pwn](md_content/T1041.md)
@@ -115,7 +115,7 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 - 🟢 [T1060 - Enumerate allocated files and folders](md_content/T1060.md)
 - 🟢 [T1061 - Recover non-allocated files](md_content/T1061.md)
     - 🟢 [T1150 - Recover non-allocated files using residual file metadata](md_content/T1150.md)
-    - 🟡 [T1064 - File carving](md_content/T1064.md)
+    - 🟢 [T1064 - File carving](md_content/T1064.md)
 - 🔴 [T1062 - Decryption of encrypted file systems/volumes](md_content/T1062.md)
 - 🟢 [T1063 - Identify file types](md_content/T1063.md)
 <a id="extract-artifacts-stored-by-the-operating-system"></a>
@@ -197,7 +197,7 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 ### Review content for relevance
 *Review potentially relevant content to determine its significance or meaning.*
 
-- 🟡 [T1054 - Manual content review for relevant material](md_content/T1054.md)
+- 🟢 [T1054 - Manual content review for relevant material](md_content/T1054.md)
 - 🔴 [T1055 - File system content inspection](md_content/T1055.md)
 - 🔴 [T1079 - Audio content analysis](md_content/T1079.md)
 - 🔴 [T1080 - Video content analysis](md_content/T1080.md)
@@ -252,11 +252,11 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 
 - 🔴 [T1014 - Chain of custody documentation](md_content/T1014.md)
 - 🟡 [T1091 - Bookmark artifacts](md_content/T1091.md)
-- 🟢 [T1092 - Produce bookmark-based automated report](md_content/T1092.md)
+- 🟢 [T1092 - Produce tag-based automated report](md_content/T1092.md)
 - 🔴 [T1093 - Write expert report](md_content/T1093.md)
 - 🔴 [T1094 - Disclosure](md_content/T1094.md)
 
 
 ---
 
-*Markdown generated: 2025-12-06 21:00:14*
+*Markdown generated: 2026-02-05 01:52:13*
