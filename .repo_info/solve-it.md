@@ -60,14 +60,12 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 - 🟢 [T1016 - Live data collection](md_content/T1016.md)
 - 🔴 [T1017 - Network packet capture](md_content/T1017.md)
 - 🔴 [T1018 - Remote data collection](md_content/T1018.md)
-- 🟢 [T1019 - Mobile backup extraction](md_content/T1019.md)
 - 🟢 [T1020 - Mobile file system extraction](md_content/T1020.md)
 - 🔴 [T1022 - Mobile device screenshot based capture](md_content/T1022.md)
-- 🔴 [T1023 - Cloud data collection using account details](md_content/T1023.md)
-- 🔴 [T1024 - Cloud data collection via request](md_content/T1024.md)
+- 🔴 [T1023 - Cloud data collection to access data via a live web page using credentials](md_content/T1023.md)
+- 🔴 [T1024 - Cloud data collection via submission of request to service provider](md_content/T1024.md)
 - 🟢 [T1025 - Writing data to a forensic image format](md_content/T1025.md)
-- 🟡 [T1026 - Writing data in standard archive format](md_content/T1026.md)
-- 🔴 [T1027 - Data read using JTAG](md_content/T1027.md)
+- 🟢 [T1026 - Writing data to standard archive format](md_content/T1026.md)
 - 🔴 [T1028 - Chip-off](md_content/T1028.md)
 - 🔴 [T1029 - Data read from desoldered eMMC](md_content/T1029.md)
 - 🔴 [T1030 - Data read from unmanaged NAND](md_content/T1030.md)
@@ -76,21 +74,29 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 - 🟢 [T1112 - Physical disk identification and removal](md_content/T1112.md)
 - 🟢 [T1113 - Access internal storage via bootable environment](md_content/T1113.md)
 - 🟡 [T1114 - Memory Acquisition via Cold Boot Attack](md_content/T1114.md)
+- 🟢 [T1157 - Extract device data using exposed service](md_content/T1157.md)
+    - 🟢 [T1019 - Mobile backup extraction](md_content/T1019.md)
+- 🟢 [T1159 - Extract mobile data via deployed agent](md_content/T1159.md)
+- 🔴 [T1160 - Collect data with 'cloud backup restore' approach](md_content/T1160.md)
+- 🔴 [T1162 - Read data from a device via In-System Programming (ISP)](md_content/T1162.md)
+    - 🔴 [T1027 - Data read using JTAG](md_content/T1027.md)
+- 🔴 [T1163 - Automated screenshot-based capture of a mobile device](md_content/T1163.md)
 <a id="gain-access"></a>
 ### Gain access
 *Attempt to gain access to protected data sources or other restricted data.*
 
 - 🟢 [T1031 - Key recovery from memory](md_content/T1031.md)
 - 🔴 [T1032 - Side channel](md_content/T1032.md)
-- 🔴 [T1033 - Extraction of account details from an accessible device](md_content/T1033.md)
+- 🔴 [T1033 - Extraction of credential from an accessible device](md_content/T1033.md)
 - 🟢 [T1034 - Brute force attack](md_content/T1034.md)
 - 🟢 [T1035 - Dictionary attack](md_content/T1035.md)
 - 🔴 [T1036 - Smudge attack](md_content/T1036.md)
-- 🔴 [T1037 - Obtain password from suspect](md_content/T1037.md)
+- 🔴 [T1037 - Obtain password from the device owner](md_content/T1037.md)
 - 🔴 [T1038 - Rainbow table-based password attack](md_content/T1038.md)
 - 🔴 [T1039 - App downgrade](md_content/T1039.md)
 - 🟡 [T1040 - Use mobile device exploit](md_content/T1040.md)
 - 🔴 [T1041 - Pin2Pwn](md_content/T1041.md)
+- 🟢 [T1158 - Configure device to enable a service needed for data extraction](md_content/T1158.md)
 <a id="read-data-from-digital-evidence-storage-formats"></a>
 ### Read data from digital evidence storage formats
 *Access data within digital evidence containers such as disk images, memory dumps, or archive formats.*
@@ -259,4 +265,4 @@ This is a generated markdown version of the SOLVE-IT knowledge base. See [GitHub
 
 ---
 
-*Markdown generated: 2026-02-05 01:52:13*
+*Markdown generated: 2026-02-05 01:58:17*
