@@ -39,7 +39,7 @@ Gain access	T1035	Dictionary attack
 Gain access	T1033	Extraction of account details from an accessible device
 Gain access	T1031	Key recovery from memory
 Gain access	T1041	Pin2Pwn
-Gain access	T1038	Rainbow tables
+Gain access	T1038	Rainbow table-based password attack
 Gain access	T1032	Side channel
 Gain access	T1036	Smudge attack
 Gain access	T1037	Obtain password from suspect
@@ -149,6 +149,6 @@ Conduct research	T1101	Cell site survey
 Conduct research	T1119	Automatically scan for artifact changes caused by app updates
 Produce documentation	T1091	Bookmark artifacts
 Produce documentation	T1094	Disclosure
-Produce documentation	T1092	Produce bookmark-based automated report
+Produce documentation	T1092	Produce tag-based automated report
 Produce documentation	T1093	Write expert report
 Produce documentation	T1014	Chain of custody documentation
