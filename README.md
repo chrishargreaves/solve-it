@@ -15,6 +15,21 @@ The SOLVE-IT knowledge base (Systematic Objective-based Listing of Various Estab
 ## Contributing
 This is a community project so please see [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to the knowledge base.
 
+## Repository Structure
+
+`data/`
+  Techniques, weaknesses and mitigations stored as JSON
+  
+`solve_it_library/`
+  Python utilities for interacting with the knowledge base
+  
+`reporting_scripts/`
+  Scripts to generate markdown and reports
+  
+`extension_data/`
+  Additional optional datasets
+
+
 
 ## Referencing
 SOLVE-IT was introduced at [DFRWS EU 2025](https://dfrws.org/presentation/solve-it-a-proposed-digital-forensic-knowledge-base-inspired-by-mitre-attck/). The associated academic paper in [FSI:Digital Investigation](https://www.sciencedirect.com/science/article/pii/S2666281725000034) can be cited as:
