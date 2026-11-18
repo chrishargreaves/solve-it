@@ -113,18 +113,24 @@ def _md(text):
     return str(text).replace("\n", " ").replace("|", "\\|").strip()
 
 
+def _label(key, name):
+    """`kind `ID` (name)`, leaving out the brackets when the item has no name."""
+    label = f"{_kind(key)} `{key}`"
+    return f"{label} ({_md(name)})" if name and name.strip() else label
+
+
 def render_summary(diff):
     """Short markdown summary of a diff, for the bot's reply."""
     if not (diff["added"] or diff["removed"] or diff["changed"]):
         return "No changes to the items since the previous revision."
     lines = []
     for key, name in diff["added"]:
-        lines.append(f"- **Added** {_kind(key)} `{key}`: {_md(name)}")
+        lines.append(f"- **Added** {_label(key, name)}")
     for key, name in diff["removed"]:
-        lines.append(f"- **Removed** {_kind(key)} `{key}`: {_md(name)}")
+        lines.append(f"- **Removed** {_label(key, name)}")
     for key, name, fields in diff["changed"]:
         changed = ", ".join(f"`{f}`" for f in fields)
-        lines.append(f"- **Changed** {_kind(key)} `{key}` ({_md(name)}): {changed}")
+        lines.append(f"- **Changed** {_label(key, name)}: {changed}")
     return "\n".join(lines)
 
 

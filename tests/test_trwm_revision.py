@@ -259,9 +259,13 @@ class TestRevisionDiff(unittest.TestCase):
         diff = {"added": [("DFM-temp-0001", "M")], "removed": [("DFW-temp-0001", "W")],
                 "changed": [("DFT-temp-0001", "T", ["description", "name"])]}
         summary = render_summary(diff)
-        self.assertIn("**Added** mitigation `DFM-temp-0001`: M", summary)
-        self.assertIn("**Removed** weakness `DFW-temp-0001`: W", summary)
+        self.assertIn("**Added** mitigation `DFM-temp-0001` (M)", summary)
+        self.assertIn("**Removed** weakness `DFW-temp-0001` (W)", summary)
         self.assertIn("**Changed** technique `DFT-temp-0001` (T): `description`, `name`", summary)
+
+    def test_summary_leaves_out_empty_names(self):
+        diff = {"added": [], "removed": [], "changed": [("DFT-temp-0001", "", ["details"])]}
+        self.assertIn("**Changed** technique `DFT-temp-0001`: `details`", render_summary(diff))
 
 
 class TestPermission(unittest.TestCase):
