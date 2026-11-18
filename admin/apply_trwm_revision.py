@@ -118,8 +118,10 @@ def build_success_reply(revision, previous, summary, preview_url, hand_edited):
     lines = [f"**Revision {revision} applied** to the [preview]({preview_url}).", ""]
     if hand_edited:
         lines.append(":warning: The preview had been edited by hand since it was last "
-                     "generated. Those edits have been replaced by this revision; if any "
-                     "of them are still needed, include them in a further revision.")
+                     "generated, and this revision replaced those edits. To see what they "
+                     "were, open the \"edited\" history on the preview. If they're still "
+                     "needed, the submitter should make the same changes in the Helper and "
+                     "send another revision.")
         lines.append("")
     lines.append(f"Changes since revision {previous}:")
     lines.append("")

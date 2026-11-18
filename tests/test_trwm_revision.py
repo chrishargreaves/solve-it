@@ -362,6 +362,8 @@ class TestReplies(unittest.TestCase):
     def test_success_reply_warns_on_hand_edit(self):
         reply = build_success_reply(2, 1, "x", "u", True)
         self.assertIn(":warning:", reply)
+        self.assertIn('"edited" history', reply)
+        self.assertIn("send another revision", reply)
 
     def test_replies_never_retrigger_the_workflow(self):
         # The workflow runs on any comment containing the heading text; the
